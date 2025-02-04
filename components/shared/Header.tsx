@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { usePathname } from 'next/navigation';
 import { SignedOut, SignInButton, SignedIn, UserButton } from '@clerk/nextjs';
@@ -28,26 +28,27 @@ export const Header = () => {
           />
         </Link>
 
-        <SignedIn>
-          <div className="hidden md:flex-between w-full max-w-xs">
-            <NavItems />
-          </div>
-        </SignedIn>
-
-        <div className="flex w-32 justify-end gap-3 mr-4">
+        <div className="flex justify-between gap-3">
           <SignedIn>
-            <UserButton />
-            <MobileNav />
+            <div className="hidden md:flex-between w-full max-w-xs">
+              <NavItems />
+            </div>
           </SignedIn>
-          <SignedOut>
-            <Button
-              asChild
-              className=" cursor-pointer rounded-full"
-              size={'lg'}
-            >
-              <SignInButton />
-            </Button>
-          </SignedOut>
+          <div className="flex w-32 justify-end gap-3 mr-4">
+            <SignedIn>
+              <UserButton />
+              <MobileNav />
+            </SignedIn>
+            <SignedOut>
+              <Button
+                asChild
+                className=" cursor-pointer rounded-full"
+                size={'lg'}
+              >
+                <SignInButton />
+              </Button>
+            </SignedOut>
+          </div>
         </div>
       </div>
       {pathname === '/' && (
