@@ -15,7 +15,7 @@ export const Footer = () => {
             height={38}
           />
         </Link>
-        <p className="text-sm">{currentYear} Evently. All Right Reserved</p>
+        <p className="text-sm">{currentYear} Vitiket. All Right Reserved</p>
       </div>
     </footer>
   );
