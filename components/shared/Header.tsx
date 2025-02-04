@@ -9,7 +9,6 @@ import Link from 'next/link';
 import MobileNav from './MobileNav';
 import NavItems from './NavItems';
 import SearchByName from './SearchByName';
-import CategoryFilter from './CategoryFilter';
 import SearchByLocation from './SearchByLocation';
 
 export const Header = () => {
@@ -52,8 +51,7 @@ export const Header = () => {
         </div>
       </div>
       {pathname === '/' && (
-        <div className="wrapper flex flex-col gap-5 md:flex-row">
-          <CategoryFilter />
+        <div className="wrapper">
           <div className="flex w-full items-center bg-[#F8F7FA] rounded-full shadow-sm">
             <SearchByName />
             <SearchByLocation />
