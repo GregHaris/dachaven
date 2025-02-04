@@ -2,7 +2,7 @@ import { getOrdersByEvent } from '@/lib/actions/order.actions';
 import { formatDateTime, formatPrice } from '@/lib/utils';
 import { IOrderItem } from '@/lib/database/models/order.model';
 import { SearchParamProps } from '@/types';
-import Search from '@/components/shared/Search';
+import Search from '@/components/shared/SearchByName';
 
 const Orders = async ({ searchParams }: SearchParamProps) => {
   const resolvedSearchParams = await searchParams;
