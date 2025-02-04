@@ -1,3 +1,6 @@
+'use client'
+
+import { usePathname } from 'next/navigation';
 import { SignedOut, SignInButton, SignedIn, UserButton } from '@clerk/nextjs';
 import { Button } from '@ui/button';
 import Image from 'next/image';
@@ -5,11 +8,13 @@ import Link from 'next/link';
 
 import MobileNav from './MobileNav';
 import NavItems from './NavItems';
-import Search from './SearchByName';
+import SearchByName from './SearchByName';
 import CategoryFilter from './CategoryFilter';
-import LocationSearch from './SearchByLocation';
+import SearchByLocation from './SearchByLocation';
 
 export const Header = () => {
+  const pathname = usePathname();
+
   return (
     <header className="w-full border-b">
       <div className="wrapper flex justify-between ">
@@ -45,11 +50,15 @@ export const Header = () => {
           </SignedOut>
         </div>
       </div>
-      <div className="wrapper flex flex-col gap-5 md:flex-row">
-        <Search />
-        <CategoryFilter />
-        <LocationSearch />
-      </div>
+      {pathname === '/' && (
+        <div className="wrapper flex flex-col gap-5 md:flex-row">
+          <CategoryFilter />
+          <div className="flex w-full items-center bg-[#F8F7FA] rounded-full shadow-sm">
+            <SearchByName />
+            <SearchByLocation />
+          </div>
+        </div>
+      )}
     </header>
   );
 };

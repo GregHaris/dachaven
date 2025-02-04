@@ -42,7 +42,7 @@ const LocationSearch = ({
   }, [location, router, searchParams]);
 
   return (
-    <div className="flex-center min-h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py2">
+    <div className="flex items-center flex-1 pl-2">
       <Image
         src="/assets/icons/location.svg"
         alt="search"
@@ -52,7 +52,7 @@ const LocationSearch = ({
       <Input
         type="text"
         placeholder={placeholder}
-        className="p-regular-16 input-field "
+        className="input-field p-regular-16"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
       />

@@ -38,17 +38,18 @@ const Search = ({placeholder = 'search event...' }: {placeholder?: string}) => {
   }, [query, router, searchParams]);
 
   return (
-    <div className="flex-center min-h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py2">
+    <div className="flex items-center flex-1 border-r border-gray-300">
       <Image
         src="/assets/icons/search.svg"
         alt="search"
         width={24}
         height={24}
+        className="ml-4"
       />
       <Input
         type="text"
         placeholder={placeholder}
-        className="p-regular-16 input-field "
+        className="input-field p-regular-16"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
