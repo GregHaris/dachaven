@@ -5,8 +5,9 @@ import Link from 'next/link';
 
 import MobileNav from './MobileNav';
 import NavItems from './NavItems';
-import Search from './Search';
+import Search from './SearchByName';
 import CategoryFilter from './CategoryFilter';
+import LocationSearch from './SearchByLocation';
 
 export const Header = () => {
   return (
@@ -31,10 +32,14 @@ export const Header = () => {
         <div className="flex w-32 justify-end gap-3 mr-4">
           <SignedIn>
             <UserButton />
-            <MobileNav/>
+            <MobileNav />
           </SignedIn>
           <SignedOut>
-            <Button asChild className=" cursor-pointer rounded-full" size={'lg'}>
+            <Button
+              asChild
+              className=" cursor-pointer rounded-full"
+              size={'lg'}
+            >
               <SignInButton />
             </Button>
           </SignedOut>
@@ -43,6 +48,7 @@ export const Header = () => {
       <div className="wrapper flex flex-col gap-5 md:flex-row">
         <Search />
         <CategoryFilter />
+        <LocationSearch />
       </div>
     </header>
   );
