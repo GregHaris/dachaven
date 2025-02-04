@@ -3,9 +3,7 @@ import Link from 'next/link';
 
 import { Button } from '@ui/button';
 import { SearchParamProps } from '@/types';
-import CategoryFilter from '@shared/CategoryFilter';
 import Collection from '@shared/Collection';
-import Search from '@shared/Search';
 
 import { getAllEvents } from '@/lib/actions/event.actions';
 
@@ -61,10 +59,6 @@ export default async function Home({ searchParams }: SearchParamProps) {
           {' '}
           Trusted by <br /> Thousands of events{' '}
         </h2>
-        <div className="flex w-full flex-col gap-5 md:flex-row">
-          <Search />
-          <CategoryFilter />
-        </div>
         <Collection
           data={events?.data}
           emptyTitle="No Events Found"

@@ -5,6 +5,8 @@ import Link from 'next/link';
 
 import MobileNav from './MobileNav';
 import NavItems from './NavItems';
+import Search from './Search';
+import CategoryFilter from './CategoryFilter';
 
 export const Header = () => {
   return (
@@ -37,6 +39,10 @@ export const Header = () => {
             </Button>
           </SignedOut>
         </div>
+      </div>
+      <div className="wrapper flex flex-col gap-5 md:flex-row">
+        <Search />
+        <CategoryFilter />
       </div>
     </header>
   );
