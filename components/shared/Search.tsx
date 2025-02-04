@@ -48,7 +48,7 @@ const Search = ({placeholder = 'search title...' }: {placeholder?: string}) => {
       <Input
         type="text"
         placeholder={placeholder}
-        className="p-regular-16 border-0 bg-grey-50 outline-offset-50 placeholder:text-grey-500 focus:border-0 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+        className="p-regular-16 input-field "
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
