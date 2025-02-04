@@ -127,8 +127,8 @@ export async function getAllEvents({
       : {};
     const conditions = {
       $and: [
-        titleCondition,
         categoryCondition ? { category: categoryCondition._id } : {},
+        titleCondition,
         locationCondition,
       ],
     };
