@@ -11,9 +11,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Event',
+  title: 'Vitiket',
   description: 'An Event management app',
-  icons: '/assets/images/logo.svg',
+  icons: '/assets/images/logo.png',
 };
 
 export default function RootLayout({
