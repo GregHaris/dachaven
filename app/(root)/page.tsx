@@ -13,6 +13,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
   const page = Number(resolvedSearchParams.page) || 1;
   const searchText = (resolvedSearchParams.query as string) || '';
   const category = (resolvedSearchParams.category as string) || '';
+  const location = (resolvedSearchParams.location as string) || '';
   const limit = resolvedSearchParams.limit
     ? Number(resolvedSearchParams.limit)
     : 6;
@@ -21,6 +22,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
     query: searchText,
     category,
     page,
+    location,
     limit: limit,
   });
 

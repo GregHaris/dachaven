@@ -111,6 +111,7 @@ export async function getAllEvents({
   limit = 6,
   page,
   category,
+  location,
 }: GetAllEventsParams) {
   try {
     await connectToDatabase();
@@ -121,10 +122,14 @@ export async function getAllEvents({
     const categoryCondition = category
       ? await getCategoryByName(category)
       : null;
+    const locationCondition = location
+      ? { location: { $regex: location, $options: 'i' } }
+      : {};
     const conditions = {
       $and: [
         titleCondition,
         categoryCondition ? { category: categoryCondition._id } : {},
+        locationCondition,
       ],
     };
 
