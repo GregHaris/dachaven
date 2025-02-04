@@ -1,3 +1,3 @@
-# Event Management App
+# Vitiket
 
-Learning to build an event management app
+Building a full stack Next.js event management app where user can create event, purchase ticket generate digital receipts with barcode and also verify receipts.
