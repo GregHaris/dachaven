@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Button } from '@ui/button';
 import { SearchParamProps } from '@/types';
 import Collection from '@shared/Collection';
+import CategoryFilter from '@shared/CategoryFilter';
 
 import { getAllEvents } from '@/lib/actions/event.actions';
 
@@ -61,6 +62,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
           {' '}
           Trusted by <br /> Thousands of events{' '}
         </h2>
+        <CategoryFilter />
         <Collection
           data={events?.data}
           emptyTitle="No Events Found"
