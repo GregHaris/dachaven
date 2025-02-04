@@ -287,7 +287,7 @@ const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
                       type="number"
                       placeholder="Price"
                       {...field}
-                      className="p-regular-16 input-field"
+                      className="p-regular-16 input-field hide-number-spinners"
                       onChange={(e) => {
                         field.onChange(e);
                         if (e.target.value) {

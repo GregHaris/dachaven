@@ -272,3 +272,13 @@
 .react-datepicker__time-list-item--selected {
   background-color: #624cf5 !important;
 }
+
+  .hide-number-spinners {
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
