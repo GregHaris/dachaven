@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { formUrlQuery, removeKeysFromQuery } from '@/lib/utils';
 import { Input } from '../ui/input';
 
-const Search = ({placeholder = 'search title...' }: {placeholder?: string}) => {
+const Search = ({placeholder = 'search event...' }: {placeholder?: string}) => {
   const [query, setQuery] = useState('');
   const searchParams = useSearchParams();
   const router = useRouter();
