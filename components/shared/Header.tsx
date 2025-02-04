@@ -16,8 +16,8 @@ export const Header = () => {
 
   return (
     <header className="w-full border-b">
-      <div className="wrapper flex justify-between ">
-        <Link href={'/'} className="w-36">
+      <div className="wrapper flex justify-between items-center">
+        <Link href={'/'} className="w-36 ">
           {' '}
           <Image
             src="/assets/images/logo.svg"
