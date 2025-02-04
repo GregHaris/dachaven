@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 export const Footer = () => {
@@ -7,15 +6,16 @@ export const Footer = () => {
   return (
     <footer className="border-t">
       <div className="flex flex-col wrapper gap-4 p-5 text-center sm:flex-row sm:justify-between sm:items-center">
-        <Link href={'/'}>
-          <Image
-            src={'/assets/images/logo.svg'}
-            alt="logo"
-            width={128}
-            height={38}
-          />
-        </Link>
-        <p className="text-sm">{currentYear} Vitiket. All Right Reserved</p>
+        <p className="text-sm">©{currentYear} Vitiket</p>
+        <p className="p-bold-20">
+          Created by:{' '}
+          <Link
+            href="https://x.com/IamAbovExcuse"
+            className="p-regular-20  text-primary-500"
+          >
+            Grëg Häris{' '}
+          </Link>
+        </p>
       </div>
     </footer>
   );
