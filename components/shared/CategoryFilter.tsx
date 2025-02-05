@@ -2,7 +2,7 @@
 
 import { formUrlQuery, removeKeysFromQuery } from '@/lib/utils';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import { getAllCategories } from '@/lib/actions/category.actions';
 import { ICategory } from '@/lib/database/models/category.model';
@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from '@ui/select';
 
-const CategoryFilter = () => {
+const Filter = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -73,4 +73,10 @@ const CategoryFilter = () => {
   );
 };
 
-export default CategoryFilter;
+export default function CategoryFilter() {
+  return (
+    <Suspense>
+      <Filter />
+    </Suspense>
+  );
+}

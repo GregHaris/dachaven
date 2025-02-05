@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 import { formUrlQuery, removeKeysFromQuery } from '@/lib/utils';
 import { Input } from '@ui/input';
 
-const LocationSearch = ({
+const Search = ({
   placeholder = 'Search by location...',
 }: {
   placeholder?: string;
@@ -60,4 +60,10 @@ const LocationSearch = ({
   );
 };
 
-export default LocationSearch;
+export default function LocationSearch() {
+  return (
+    <Suspense>
+      <Search />
+    </Suspense>
+  );
+}

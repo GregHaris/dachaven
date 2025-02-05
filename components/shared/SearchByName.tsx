@@ -1,13 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 import { formUrlQuery, removeKeysFromQuery } from '@/lib/utils';
 import { Input } from '../ui/input';
 
-const Search = ({placeholder = 'search event...' }: {placeholder?: string}) => {
+const NameSearch = ({
+  placeholder = 'search event...',
+}: {
+  placeholder?: string;
+}) => {
   const [query, setQuery] = useState('');
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -57,4 +61,10 @@ const Search = ({placeholder = 'search event...' }: {placeholder?: string}) => {
   );
 };
 
-export default Search;
+export default function Search() {
+  return (
+    <Suspense>
+      <NameSearch />
+    </Suspense>
+  );
+}

@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,7 +8,7 @@ import CategoryFilter from '@shared/CategoryFilter';
 
 import { getAllEvents } from '@/lib/actions/event.actions';
 
-const HomeContent = async ({ searchParams }: SearchParamProps) => {
+export default async function Home({ searchParams }: SearchParamProps) {
   const resolvedSearchParams = await searchParams;
 
   const page = Number(resolvedSearchParams.page) || 1;
@@ -75,13 +74,5 @@ const HomeContent = async ({ searchParams }: SearchParamProps) => {
         />
       </section>
     </>
-  );
-};
-
-export default function Home(props: SearchParamProps) {
-  return (
-    <Suspense>
-      <HomeContent {...props} />
-    </Suspense>
   );
 }
