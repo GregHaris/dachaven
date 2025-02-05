@@ -16,7 +16,7 @@ export const Header = () => {
 
   return (
     <header className="w-full border-b">
-      <div className="wrapper flex justify-between items-center">
+      <div className=" mt-5 px-3  flex justify-between items-center">
         <Link href={'/'} className="w-36 ">
           {' '}
           <Image
