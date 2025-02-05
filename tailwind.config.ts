@@ -37,7 +37,7 @@ const config = {
           400: '#AFAFAF', // Disabled - color name in figma
           50: '#F6F6F6', // White Grey - color name in figma
         },
-        black: '#000000',
+        black: '#36454F',
         white: '#FFFFFF',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
