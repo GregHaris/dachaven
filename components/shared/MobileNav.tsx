@@ -24,7 +24,7 @@ const MobileNav = () => {
             className="cursor-pointer"
           />
         </SheetTrigger>
-        <SheetContent className="flex flex-col gap-6 bg-white md:hidden">
+        <SheetContent className="flex flex-col w-[200px] gap-6 bg-white md:hidden">
           <SheetHeader>
             <SheetTitle className="sr-only">Mobile Navigation</SheetTitle>{' '}
             <SheetDescription className="sr-only">
