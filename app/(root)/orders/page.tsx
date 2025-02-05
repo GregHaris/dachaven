@@ -2,7 +2,7 @@ import { getOrdersByEvent } from '@/lib/actions/order.actions';
 import { formatDateTime, formatPrice } from '@/lib/utils';
 import { IOrderItem } from '@/lib/database/models/order.model';
 import { SearchParamProps } from '@/types';
-import Search from '@/components/shared/SearchByName';
+import {NameSearch} from '@shared/SearchByName';
 
 const Orders = async ({ searchParams }: SearchParamProps) => {
   const resolvedSearchParams = await searchParams;
@@ -17,7 +17,7 @@ const Orders = async ({ searchParams }: SearchParamProps) => {
       </section>
 
       <section className="wrapper mt-8">
-        <Search placeholder="Search buyer name..." />
+        <NameSearch placeholder="Search buyer name..." />
       </section>
 
       <section className="wrapper overflow-x-auto">

@@ -5,9 +5,9 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 import { formUrlQuery, removeKeysFromQuery } from '@/lib/utils';
-import { Input } from '../ui/input';
+import { Input } from '@ui/input';
 
-const NameSearch = ({
+export const NameSearch = ({
   placeholder = 'search event...',
 }: {
   placeholder?: string;
