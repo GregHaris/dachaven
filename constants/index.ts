@@ -25,3 +25,18 @@ export const eventDefaultValues = {
   isFree: false,
   url: '',
 };
+
+export const heroSlides = [
+  {
+    image: '/assets/images/hero3.png',
+  },
+  {
+    image: '/assets/images/hero.png',
+  },
+  {
+    image: '/assets/images/hero2.png',
+  },
+  {
+    image: '/assets/images/hero1.png',
+  },
+];
