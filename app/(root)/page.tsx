@@ -3,7 +3,8 @@ import Collection from '@shared/Collection';
 import CategoryFilter from '@shared/CategoryFilter';
 
 import { getAllEvents } from '@/lib/actions/event.actions';
-import HeroSection from '@shared/HeroSection';
+import HeroSection from '@/components/shared/DesktopHeroSection';
+import MobileHeroSection from '@shared/MobileHero';
 
 export default async function Home({ searchParams }: SearchParamProps) {
   const resolvedSearchParams = await searchParams;
@@ -27,12 +28,13 @@ export default async function Home({ searchParams }: SearchParamProps) {
   return (
     <>
       <section className="wrapper">
-        <div className="flex flex-col justify-center gap-8 text-center  bg-primary-50 bg-dotted-pattern bg-contain">
+        <div className="hidden md:flex flex-col justify-center gap-8 text-center  bg-primary-50 bg-dotted-pattern bg-contain">
           <h1 className="h1-bold">
             Host, Connect, Celebrate: Your Event, Our Platform!
           </h1>
         </div>
         <HeroSection />
+        <MobileHeroSection/>
       </section>
 
       <section
