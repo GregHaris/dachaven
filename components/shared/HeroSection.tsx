@@ -11,7 +11,8 @@ import { Button } from '@ui/button';
 const heroSlides = [
   {
     image: '/assets/images/hero3.png',
-  },  {
+  },
+  {
     image: '/assets/images/hero.png',
   },
   {
@@ -124,4 +125,3 @@ function CarouselDots({ total, current }: { total: number; current: number }) {
     </div>
   );
 }
-
