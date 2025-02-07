@@ -85,7 +85,7 @@
   }
   .p-regular-20 {
     @apply text-[20px] font-normal leading-[30px] tracking-[2%];
-  } 
+  }
   .lg\:.p-regular-20 {
     @apply text-[20px] font-normal leading-[30px] tracking-[2%];
   }
@@ -215,12 +215,12 @@
     margin: 0;
     scroll-behavior: smooth;
   }
-  
+
   body {
     font-family: var(--font-poppins);
-    color: #36454F;
+    color: #36454f;
   }
-  
+
   .filter-grey {
     filter: brightness(0) saturate(100%) invert(47%) sepia(0%) saturate(217%)
       hue-rotate(32deg) brightness(98%) contrast(92%);
@@ -274,12 +274,12 @@
   background-color: #624cf5 !important;
 }
 
-  .hide-number-spinners {
-    &::-webkit-inner-spin-button,
-    &::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-    appearance: textfield;
-    -moz-appearance: textfield;
+.hide-number-spinners {
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
