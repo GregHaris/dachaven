@@ -39,6 +39,7 @@
     "react-hook-form": "^7.54.2",
     "stripe": "^17.6.0",
     "svix": "^1.45.1",
+    "swiper": "^11.2.2",
     "tailwind-merge": "^2.6.0",
     "tailwindcss": "^4.0.0",
     "tailwindcss-animate": "^1.0.7",

@@ -95,6 +95,9 @@ importers:
       svix:
         specifier: ^1.45.1
         version: 1.45.1
+      swiper:
+        specifier: ^11.2.2
+        version: 11.2.2
       tailwind-merge:
         specifier: ^2.6.0
         version: 2.6.0
@@ -2344,6 +2347,10 @@ packages:
 
   svix@1.45.1:
     resolution: {integrity: sha512-KQ4G9xralBsmAx/5VFVlOivFlBux2EhRwPJOstmr+US2w2Uz9K31kVqmwbYbsxJIlZtOrWrmVCz6rQd1Hoq+vA==}
+
+  swiper@11.2.2:
+    resolution: {integrity: sha512-FmAN6zACpVUbd/1prO9xQ9gKo9cc6RE2UKU/z4oXtS8fNyX4sdOW/HHT/e444WucLJs0jeMId6WjdWM2Lrs8zA==}
+    engines: {node: '>= 4.7.0'}
 
   swr@2.3.0:
     resolution: {integrity: sha512-NyZ76wA4yElZWBHzSgEJc28a0u6QZvhb6w0azeL2k7+Q1gAzVK+IqQYXhVOC/mzi+HZIozrZvBVeSeOZNR2bqA==}
@@ -4903,6 +4910,8 @@ snapshots:
       url-parse: 1.5.10
     transitivePeerDependencies:
       - encoding
+
+  swiper@11.2.2: {}
 
   swr@2.3.0(react@19.0.0):
     dependencies:
