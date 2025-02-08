@@ -44,13 +44,15 @@ const CheckoutButton = ({ event }: { event: IEvent }) => {
         ) : (
           <>
             <SignedOut>
-              <Button
-                className="button cursor-pointer rounded-full"
-                size={'lg'}
-                asChild
-              >
-                <SignInButton>Get Tickets</SignInButton>
-              </Button>
+              <SignInButton>
+                <Button
+                  className="button cursor-pointer rounded-full"
+                  size={'lg'}
+                  asChild
+                >
+                  Get Tickets
+                </Button>
+              </SignInButton>
             </SignedOut>
 
             <SignedIn>
