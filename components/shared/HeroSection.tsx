@@ -25,7 +25,7 @@ function HeroContent({
       className={`relative z-10 flex flex-col justify-center items-center h-full ${className}`}
     >
       <div className="space-y-8 text-center">
-        <h1 className="text-white text-5xl md:text-6xl font-extrabold leading-tight tracking-tight whitespace-pre-line drop-shadow-lg bg-primary-500 p-6">
+        <h1 className="text-white h1-bold tracking-tight whitespace-pre-line drop-shadow-lg bg-primary-500 p-6">
           {hero.title}
         </h1>
         <Button
