@@ -50,7 +50,7 @@ export const Header = () => {
           </div>
         </div>
       </div>
-      {pathname === '/' || pathname === '/events' && (
+      {(pathname === '/' || pathname === '/events') && (
         <div className="wrapper">
           <div className="flex w-full items-center bg-[#F8F7FA] rounded-full shadow-sm">
             <SearchByName />
