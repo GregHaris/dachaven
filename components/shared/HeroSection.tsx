@@ -22,10 +22,10 @@ function HeroContent({
 }) {
   return (
     <div
-      className={`relative z-10 flex flex-col justify-center h-full ${className}`}
+      className={`relative z-10 flex flex-col justify-center items-center h-full ${className}`}
     >
-      <div className="space-y-8">
-        <h1 className="text-white text-5xl md:text-6xl font-extrabold leading-tight tracking-tight whitespace-pre-line drop-shadow-lg bg-primary-500">
+      <div className="space-y-8 text-center">
+        <h1 className="text-white text-5xl md:text-6xl font-extrabold leading-tight tracking-tight whitespace-pre-line drop-shadow-lg bg-primary-500 p-6">
           {hero.title}
         </h1>
         <Button
@@ -62,7 +62,7 @@ export function HeroSection() {
         }}
         loop={true}
         modules={[Navigation, Pagination, Autoplay]}
-        className="h-96 w-full rounded-lg cursor-pointer"
+        className="h-[60vh] w-full rounded-lg cursor-pointer"
       >
         {content.map((hero, index) => (
           <SwiperSlide key={index}>
