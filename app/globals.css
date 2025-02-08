@@ -134,7 +134,7 @@
     @apply bg-grey-50! flex! flex-1! placeholder:text-grey-500! px-5! py-3! border-none! focus-visible:ring-transparent!;
   }
   .button {
-    @apply rounded-full h-[54px];
+    @apply rounded-md h-[54px];
   }
   .select-item {
     @apply py-3 cursor-pointer focus:bg-primary-50;
