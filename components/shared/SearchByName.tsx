@@ -8,7 +8,7 @@ import { formUrlQuery, removeKeysFromQuery } from '@/lib/utils';
 import { Input } from '@ui/input';
 
 export const NameSearch = ({
-  placeholder = 'search event...',
+  placeholder = 'Search events...',
 }: {
   placeholder?: string;
 }) => {

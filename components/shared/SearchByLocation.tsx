@@ -8,7 +8,7 @@ import { formUrlQuery, removeKeysFromQuery } from '@/lib/utils';
 import { Input } from '@ui/input';
 
 const Search = ({
-  placeholder = 'Search by location...',
+  placeholder = 'Location...',
 }: {
   placeholder?: string;
 }) => {
