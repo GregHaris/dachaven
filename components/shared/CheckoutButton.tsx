@@ -40,7 +40,7 @@ const CheckoutButton = ({ event }: { event: IEvent }) => {
             Sorry, tickets are no longer available.
           </p>
         ) : hasPurchased ? (
-          <p className="p-2 text-green-400">Ticket already purchased</p>
+          <p className="p-2 text-red-400">Ticket already purchased</p>
         ) : (
           <>
             <SignedOut>
