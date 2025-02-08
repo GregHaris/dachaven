@@ -4,15 +4,42 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 
-import { heroSlides } from '@/constants';
+import { heroContent } from '@/constants';
+import { Button } from '@ui/button';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import '@/css/heroSectionStyles.css';
+import Link from 'next/link';
+
+function HeroContent({
+  hero,
+  className,
+}: {
+  hero: (typeof heroContent)[0];
+  className: string;
+}) {
+  return (
+    <div
+      className={`relative z-10 flex flex-col justify-center h-full ${className}`}
+    >
+      <div className="space-y-8">
+        <h1 className="text-white text-5xl md:text-6xl font-extrabold leading-tight tracking-tight whitespace-pre-line drop-shadow-lg bg-primary-500">
+          {hero.title}
+        </h1>
+        <Button
+          size="lg"
+          className=" button bg-primary-500 cursor-pointer p-regular-16">
+          <Link href={'/events'}>{hero.cta}</Link>
+        </Button>
+      </div>
+    </div>
+  );
+}
 
 export function HeroSection() {
-  const images = heroSlides;
+  const content = heroContent;
 
   return (
     <div>
@@ -36,15 +63,19 @@ export function HeroSection() {
         modules={[Navigation, Pagination, Autoplay]}
         className="h-96 w-full rounded-lg cursor-pointer"
       >
-        {images.map((image, index) => (
+        {content.map((hero, index) => (
           <SwiperSlide key={index}>
-            <div className="flex h-full w-full items-center justify-center">
+            <div className="relative h-full w-full">
               <Image
-                src={image.src}
-                alt={image.alt}
-                width={1000}
-                height={1000}
+                src={hero.backgroundImage}
+                alt={hero.title}
+                fill
                 className="block h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/30 z-10" />
+              <HeroContent
+                hero={hero}
+                className="absolute inset-0 p-8 md:p-16"
               />
             </div>
           </SwiperSlide>
