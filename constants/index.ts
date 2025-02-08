@@ -13,42 +13,28 @@ export const headerLinks = [
   },
 ];
 
-export const desktopHeroSlides = [
+export const heroContent = [
   {
-    image: '/assets/images/hero3.png',
+    title:
+      'From Blockchain to AI, and Beyond.\nYour Passport to Tech Innovation.',
+    cta: 'Explore Tech Events',
+    backgroundImage: '/assets/images/hero1.png?height=800&width=1200',
   },
   {
-    image: '/assets/images/hero.png',
+    title: 'Connect, Learn, and Grow.\nFind Your Tribe at the Next Tech Event.',
+    cta: 'Explore events',
+    backgroundImage: '/assets/images/hero3.png?height=800&width=1200',
   },
   {
-    image: '/assets/images/hero2.png',
+    title:
+      'Navigate the Future of Tech.\nYour Gateway to the Best Tech Events.',
+    cta: 'Discover Tech Events',
+    backgroundImage: '/assets/images/hero4.png?height=800&width=1200',
   },
   {
-    image: '/assets/images/hero1.png',
-  },
-];
-
-export const mobileHeroSlides = [
-  {
-    image: '/assets/images/mobHero.png',
-  },
-  {
-    image: '/assets/images/4.png',
-  },
-  {
-    image: '/assets/images/5.png',
-  },
-  {
-    image: '/assets/images/7.png',
-  },
-  {
-    image: '/assets/images/8.png',
-  },
-  {
-    image: '/assets/images/9.png',
-  },
-  {
-    image: '/assets/images/10.png',
+    title: 'Participate or Learn from Anywhere.\nUnlock the World of Virtual Tech Events.',
+    cta: 'Explore Virtual Events',
+    backgroundImage: '/assets/images/hero5.png?height=800&width=1200',
   },
 ];
 
