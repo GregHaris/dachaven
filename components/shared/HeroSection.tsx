@@ -30,7 +30,8 @@ function HeroContent({
         </h1>
         <Button
           size="lg"
-          className=" button bg-primary-500 cursor-pointer p-regular-16">
+          className=" button bg-primary-500 cursor-pointer p-regular-16"
+        >
           <Link href={'/events'}>{hero.cta}</Link>
         </Button>
       </div>
