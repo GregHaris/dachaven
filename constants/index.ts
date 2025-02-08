@@ -33,7 +33,7 @@ export const heroContent = [
   },
   {
     title:
-      'Participate or Learn from Anywhere.\nUnlock the World of Virtual Tech Events.',
+      'Participate or Learn from Anywhere.',
     cta: 'Explore Virtual Events',
     backgroundImage: '/assets/images/hero5.png?height=800&width=1200',
   },
