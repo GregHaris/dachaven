@@ -8,7 +8,7 @@ import { IOrder } from '@/lib/database/models/order.model';
 import { SearchParamProps } from '@/types';
 import Collection from '@shared/Collection';
 
-const ProfilePage = async ({ searchParams }: SearchParamProps) => {
+const Dashboard = async ({ searchParams }: SearchParamProps) => {
   const resolvedSearchParams = await searchParams;
   const { sessionClaims } = await auth();
 
@@ -80,4 +80,4 @@ const ProfilePage = async ({ searchParams }: SearchParamProps) => {
   );
 };
 
-export default ProfilePage;
+export default Dashboard;
