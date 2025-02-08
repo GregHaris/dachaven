@@ -15,10 +15,9 @@ export const Header = () => {
   const pathname = usePathname();
 
   return (
-    <header className="w-full border-b">
-      <div className=" mt-5 px-3  flex justify-between items-center">
-        <Link href={'/'} className="w-36 ">
-          {' '}
+    <header className="w-full border-b pb-5">
+      <div className="mt-5 px-3 flex justify-between items-center">
+        <Link href={'/'} className="w-36">
           <Image
             src="/assets/images/logo.svg"
             alt="logo image"
@@ -26,6 +25,15 @@ export const Header = () => {
             height={38}
           />
         </Link>
+
+        {(pathname === '/' || pathname === '/events') && (
+          <div className="hidden halfwayFlex flex-1 justify-center mx-4">
+            <div className="flex w-full max-w-2xl items-center bg-[#F8F7FA] rounded-full shadow-sm">
+              <SearchByName />
+              <SearchByLocation />
+            </div>
+          </div>
+        )}
 
         <div className="flex justify-between gap-3">
           <SignedIn>
@@ -41,7 +49,7 @@ export const Header = () => {
             <SignedOut>
               <Button
                 asChild
-                className=" cursor-pointer rounded-full"
+                className="cursor-pointer rounded-full"
                 size={'lg'}
               >
                 <SignInButton />
@@ -50,8 +58,9 @@ export const Header = () => {
           </div>
         </div>
       </div>
+
       {(pathname === '/' || pathname === '/events') && (
-        <div className="wrapper">
+        <div className="wrapper halfwayHidden">
           <div className="flex w-full items-center bg-[#F8F7FA] rounded-full shadow-sm">
             <SearchByName />
             <SearchByLocation />

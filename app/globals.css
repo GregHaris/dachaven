@@ -86,7 +86,7 @@
   .p-regular-20 {
     @apply text-[20px] font-normal leading-[30px] tracking-[2%];
   }
-  .lg\:.p-regular-20 {
+  .lg\:p-regular-20 {
     @apply text-[20px] font-normal leading-[30px] tracking-[2%];
   }
   .p-semibold-18 {
@@ -141,6 +141,18 @@
   }
   .toggle-switch {
     @apply bg-gray-300!;
+  }
+
+  .halfwayHidden {
+    @media (min-width: 65.7rem) {
+      display: none !important;
+    }
+  }
+
+  .halfwayFlex {
+    @media (width >= 65.7rem) {
+      display: flex !important;
+    }
   }
 }
 
