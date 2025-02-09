@@ -44,9 +44,9 @@ export default async function Home({ searchParams }: SearchParamProps) {
         <CategoryFilter />
         <Collection
           data={events?.data}
-          emptyTitle="No Events Found"
+          emptyTitle="No Product Found"
           emptyStateSubtext="Check back later"
-          collectionType="All_Events"
+          collectionType="All_Products"
           limit={limit}
           page={page}
           totalPages={events?.totalPages}
