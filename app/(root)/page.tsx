@@ -30,7 +30,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
         <div className="wrapper">
           <div className=" md:flex flex-col justify-center gap-8 md:text-center  bg-primary-50 bg-dotted-pattern bg-contain">
             <h1 className="h1-bold">
-              Host, Connect, Celebrate: Your Event, Our Platform!
+              Buy, Sell, Connect: Your Needs, Our Marketplace!
             </h1>
           </div>
           <HeroSection />
