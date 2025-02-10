@@ -62,12 +62,6 @@ export default function TextEditorMenuBar({
       disabled: !editor.can().chain().focus().toggleStrike().run(),
     },
     {
-      icon: <RiCodeSSlashLine className="size-5" />,
-      onClick: () => editor.chain().focus().toggleCode().run(),
-      isActive: editor.isActive('code'),
-      disabled: !editor.can().chain().focus().toggleCode().run(),
-    },
-    {
       icon: <IoListOutline className="size-5" />,
       onClick: () => editor.chain().focus().toggleBulletList().run(),
       isActive: editor.isActive('bulletList'),
