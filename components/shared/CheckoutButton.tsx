@@ -19,39 +19,42 @@ const CheckoutButton = ({
   }
 
   const userId = user?.publicMetadata.userId as string;
+  
   const isProductListingsCreator =
     userId === productListing.seller._id.toString();
 
   const isProductAvailable = productListing.isAvailable === false;
 
-  return (
-    !isProductListingsCreator && (
-      <div className="flex item-center gap-3">
-        {!isProductAvailable ? (
-          <p className="p-2 text-red-400">
-            Sorry, this product is no longer available.
-          </p>
-        ) : (
-          <>
-            <SignedOut>
-              <SignInButton>
-                <Button
-                  className="button cursor-pointer rounded-full"
-                  size={'lg'}
-                  asChild
-                >
-                  Purchase Item
-                </Button>
-              </SignInButton>
-            </SignedOut>
+  if (isProductListingsCreator) {
+    return null;
+  }
 
-            <SignedIn>
-              <Checkout productListing={productListing} userId={userId} />
-            </SignedIn>
-          </>
-        )}
-      </div>
-    )
+  return (
+    <div className="flex item-center gap-3">
+      {!isProductAvailable ? (
+        <p className="p-2 text-red-400">
+          Sorry, this product is no longer available.
+        </p>
+      ) : (
+        <>
+          <SignedOut>
+            <SignInButton>
+              <Button
+                className="button cursor-pointer rounded-full"
+                size={'lg'}
+                asChild
+              >
+                Purchase Item
+              </Button>
+            </SignInButton>
+          </SignedOut>
+
+          <SignedIn>
+            <Checkout productListing={productListing} userId={userId} />
+          </SignedIn>
+        </>
+      )}
+    </div>
   );
 };
 
