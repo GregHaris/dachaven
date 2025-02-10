@@ -11,7 +11,7 @@ export interface IProductListing extends Document {
   seller: { _id: string; firstName: string; lastName: string };
   createdAt: Date;
   updatedAt: Date;
-  condition: string; // "New", "Used - Like New", etc.
+  condition: string;
   brand?: string;
   productModel?: string;
   deliveryOptions: string;
