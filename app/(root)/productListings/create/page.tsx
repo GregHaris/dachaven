@@ -7,7 +7,7 @@ const CreateProductListings = () => {
   const { isLoaded, user } = useUser();
 
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <div>{' '}</div>;
   }
 
   const userId = user?.id as string;
