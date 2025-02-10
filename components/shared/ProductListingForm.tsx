@@ -1,32 +1,41 @@
 'use client';
 
+import { useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { useUploadThing } from '@/lib/uploadthing';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
-import DatePicker from 'react-datepicker';
+import { useUploadThing } from '@/lib/uploadthing';
+import type { z } from 'zod';
 
-import 'react-datepicker/dist/react-datepicker.css';
-
-import { Button } from '@ui/button';
-import { Checkbox } from '@ui/checkbox';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@ui/form';
-import { Input } from '@ui/input';
-import { Textarea } from '@ui/textarea';
-
-import Dropdown from './Dropdown';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import FileUploader from './FileUploader';
-
 import {
   createProductListing,
   updateProductListing,
 } from '@/lib/actions/productListing.actions';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import type { IProductListing } from '@/lib/database/models/productListing.model';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { productListingDefaultValues } from '@/constants';
-import { productListingFormSchema } from '@lib/validator';
-import { IProductListing } from '@/lib/database/models/productListing.model';
+import { productListingFormSchema } from '@/lib/validator/index';
+import TiptapEditor from './TiptapEditor';
 
 type ProductListingFormProps = {
   userId: string;
@@ -35,32 +44,34 @@ type ProductListingFormProps = {
   productListingId?: string;
 };
 
-const ProductListingForm = ({
+export default function ProductListingForm({
   userId,
   type,
   productListing,
   productListingId,
-}: ProductListingFormProps) => {
+}: ProductListingFormProps) {
   const [files, setFiles] = useState<File[]>([]);
+  const router = useRouter();
+  const { startUpload } = useUploadThing('imageUploader');
 
-  // Set default values
   const initialValues =
     productListing && type === 'Update'
       ? {
           ...productListing,
+          category: productListing.category
+            ? {
+                _id: productListing.category._id,
+                name: productListing.category.name,
+              }
+            : { _id: '', name: '' },
         }
       : productListingDefaultValues;
 
-  const router = useRouter();
-  const { startUpload } = useUploadThing('imageUploader');
-
-  // 1. Define your form.
   const form = useForm<z.infer<typeof productListingFormSchema>>({
     resolver: zodResolver(productListingFormSchema),
     defaultValues: initialValues,
   });
 
-  // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof productListingFormSchema>) {
     let uploadedImageUrl = values.imageUrl;
 
@@ -116,146 +127,384 @@ const ProductListingForm = ({
   }
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-5"
-      >
-        <div className="flex flex-col gap-5 md:flex-row">
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <Input
-                    placeholder="ProductListings Title"
-                    {...field}
-                    className="input-field p-regular-16"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />{' '}
-          <FormField
-            control={form.control}
-            name="categoryId"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <Dropdown
-                    onChangeHandler={field.onChange}
-                    value={field.value}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className="flex flex-col gap-5 md:flex-row">
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl className="h-72 resize-none">
-                  <Textarea
-                    placeholder="ProductListings Description"
-                    {...field}
-                    className="textarea rounded-2xl p-regular-16"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="imageUrl"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl className="h-72 resize-none">
-                  <FileUploader
-                    onFieldChange={field.onChange}
-                    imageUrl={field.value}
-                    setFiles={setFiles}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className="flex flex-col gap-5 md:flex-row">
-          <FormField
-            control={form.control}
-            name="location"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
-                    <Image
-                      src="/assets/icons/location-grey.svg"
-                      width={20}
-                      height={20}
-                      alt="location"
-                    />
-                    <Input
-                      placeholder="ProductListings Location or Online"
-                      {...field}
-                      className="input-field p-regular-16"
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>{' '}
-        <div className="flex flex-col gap-5 md:flex-row">
-          <FormField
-            control={form.control}
-            name="price"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl>
-                  <div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
-                    <Image
-                      src="/assets/icons/dollar.svg"
-                      width={20}
-                      height={20}
-                      alt="dollar"
-                      className="filter-grey"
-                    />
-                    <Input
-                      type="number"
-                      placeholder="Price"
-                      {...field}
-                      className="p-regular-16 input-field hide-number-spinners"
-                      value={field.value}
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <Button
-          type="submit"
-          size="lg"
-          disabled={form.formState.isSubmitting}
-          className="button col-span-2 w-full cursor-pointer"
-        >
-          {form.formState.isSubmitting
-            ? 'Submitting...'
-            : `${type} ProductListings`}
-        </Button>
-      </form>
-    </Form>
-  );
-};
+    <div className="min-h-screen bg-[#FAFAFA]">
+      <div className="wrapper">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div>
+            <div className="mb-8">
+              <h1 className="text-2xl font-semibold mb-2">
+                {type === 'Create' ? 'Create a New Listing' : 'Update Listing'}
+              </h1>
+              <p className="text-gray-600">
+                {type === 'Create'
+                  ? 'Fill in the details below to list your product'
+                  : 'Update the details of your product listing'}
+              </p>
+            </div>
 
-export default ProductListingForm;
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6"
+              >
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium">
+                        Title <span className="text-coral-400">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Product title"
+                          {...field}
+                          className="input-field p-regular-16"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium">
+                        Description <span className="text-coral-400">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <TiptapEditor
+                          initialContent={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="imageUrl"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium">
+                        Image <span className="text-coral-400">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <FileUploader
+                          imageUrl={field.value}
+                          onFieldChange={field.onChange}
+                          setFiles={setFiles}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="price"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium">
+                          Price <span className="text-coral-400">*</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="0.00"
+                            {...field}
+                            className="input-field p-regular-16"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="currency"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium">
+                          Currency <span className="text-coral-400">*</span>
+                        </FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger className="select-field p-regular-16">
+                              <SelectValue placeholder="Select currency" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="NGN">NGN</SelectItem>
+                            <SelectItem value="USD">USD</SelectItem>
+                            <SelectItem value="EUR">EUR</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <FormField
+                  control={form.control}
+                  name="categoryId"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium">
+                        Category <span className="text-coral-400">*</span>
+                      </FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="select-field p-regular-16">
+                            <SelectValue placeholder="Select a category" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="electronics">
+                            Electronics
+                          </SelectItem>
+                          <SelectItem value="clothing">Clothing</SelectItem>
+                          <SelectItem value="home">Home & Garden</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="condition"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium">
+                        Condition <span className="text-coral-400">*</span>
+                      </FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="select-field p-regular-16">
+                            <SelectValue placeholder="Select condition" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="New">New</SelectItem>
+                          <SelectItem value="Used - Like New">
+                            Used - Like New
+                          </SelectItem>
+                          <SelectItem value="Used - Good">
+                            Used - Good
+                          </SelectItem>
+                          <SelectItem value="Used - Fair">
+                            Used - Fair
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="brand"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium">
+                          Brand
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Brand name"
+                            {...field}
+                            className="input-field p-regular-16"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="productModel"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium">
+                          Model
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Product model"
+                            {...field}
+                            className="input-field p-regular-16"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <FormField
+                  control={form.control}
+                  name="deliveryOptions"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium">
+                        Delivery Options{' '}
+                        <span className="text-coral-400">*</span>
+                      </FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="select-field p-regular-16">
+                            <SelectValue placeholder="Select delivery option" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Pickup">Pickup</SelectItem>
+                          <SelectItem value="Delivery">Delivery</SelectItem>
+                          <SelectItem value="Mail">Mail</SelectItem>
+                          <SelectItem value="Online">Online</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="quantity"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium">
+                          Quantity <span className="text-coral-400">*</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            {...field}
+                            onChange={(e) =>
+                              field.onChange(
+                                Number.parseInt(e.target.value, 10)
+                              )
+                            }
+                            className="input-field p-regular-16 hide-number-spinners"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="location"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium">
+                          Location <span className="text-coral-400">*</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="City, State"
+                            {...field}
+                            className="input-field p-regular-16"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="isAvailable"
+                    render={({ field }) => (
+                      <FormItem className="flex items-start space-x-3 space-y-0">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                            className="toggle-switch"
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel>Available</FormLabel>
+                          <FormDescription>
+                            Is this product currently available for purchase?
+                          </FormDescription>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="isNegotiable"
+                    render={({ field }) => (
+                      <FormItem className="flex items-start space-x-3 space-y-0">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                            className="toggle-switch"
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel>Negotiable</FormLabel>
+                          <FormDescription>
+                            Is the price negotiable?
+                          </FormDescription>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  className="button w-full"
+                >
+                  {type === 'Create' ? 'Create Listing' : 'Update Listing'}
+                </Button>
+              </form>
+            </Form>
+          </div>
+
+          <div className="hidden lg:block">
+            <Image
+              src={'/assets/images/logo.svg'}
+              alt="vitiket"
+              width={600}
+              height={800}
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
