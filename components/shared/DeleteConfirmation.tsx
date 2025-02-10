@@ -16,9 +16,13 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 
-import { deleteEvent } from '@/lib/actions/event.actions';
+import { deleteProductListings } from '@/lib/actions/productListing.actions';
 
-export const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
+export const DeleteConfirmation = ({
+  productListingId,
+}: {
+  productListingId: string;
+}) => {
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 
@@ -37,7 +41,7 @@ export const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you sure you want to delete?</AlertDialogTitle>
           <AlertDialogDescription className="p-regular-16 text-grey-600">
-            This will permanently delete this event
+            This will permanently delete this productListing
           </AlertDialogDescription>
         </AlertDialogHeader>
 
@@ -49,7 +53,10 @@ export const DeleteConfirmation = ({ eventId }: { eventId: string }) => {
           <AlertDialogAction
             onClick={() =>
               startTransition(async () => {
-                await deleteEvent({ eventId, path: pathname });
+                await deleteProductListings({
+                  productListingId,
+                  path: pathname,
+                });
               })
             }
             className="cursor-pointer"

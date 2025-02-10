@@ -1,9 +1,11 @@
-import { getAllEvents } from '@/lib/actions/event.actions';
+import { getAllProductListings } from '@/lib/actions/productListing.actions';
 import { SearchParamProps } from '@/types';
 import Collection from '@shared/Collection';
 import CategoryFilter from '@shared/CategoryFilter';
 
-export default async function Events({ searchParams }: SearchParamProps) {
+export default async function ProductListings({
+  searchParams,
+}: SearchParamProps) {
   const resolvedSearchParams = await searchParams;
 
   const page = Number(resolvedSearchParams.page) || 1;
@@ -14,7 +16,7 @@ export default async function Events({ searchParams }: SearchParamProps) {
     ? Number(resolvedSearchParams.limit)
     : 6;
 
-  const events = await getAllEvents({
+  const productListings = await getAllProductListings({
     query: searchText,
     category,
     page,
@@ -22,16 +24,19 @@ export default async function Events({ searchParams }: SearchParamProps) {
     limit: limit,
   });
   return (
-    <section id="events" className="wrapper my-2 flex flex-col gap-8 md:gap-12">
+    <section
+      id="productListings"
+      className="wrapper my-2 flex flex-col gap-8 md:gap-12"
+    >
       <CategoryFilter />
       <Collection
-        data={events?.data}
-        emptyTitle="No Events Found"
-        emptyStateSubtext="Check back later"
-        collectionType="All_Events"
+        data={productListings?.data}
+        emptyTitle="Listings Coming Soon!"
+        emptyStateSubtext="We're adding new listings every day"
+        collectionType="All_Listings"
         limit={limit}
         page={page}
-        totalPages={events?.totalPages}
+        totalPages={productListings?.totalPages}
       />
     </section>
   );

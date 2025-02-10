@@ -15,48 +15,56 @@ export type UpdateUserParams = {
   image: string;
 };
 
-// ====== EVENT PARAMS
-export type CreateEventParams = {
+// ====== PRODUCT LISTING PARAMS
+export type CreateProductListingParams = {
   userId: string;
-  event: {
+  productListing: {
     title: string;
     description: string;
-    location: string;
     imageUrl: string;
-    startDateTime: Date;
-    endDateTime: Date;
-    categoryId: string;
     price: string;
-    isFree: boolean;
-    url: string;
+    currency: string;
+    categoryId: string;
+    condition: string;
+    brand?: string;
+    productModel?: string;
+    deliveryOptions: string;
+    quantity: number;
+    location: string;
+    isAvailable: boolean;
+    isNegotiable: boolean;
   };
   path: string;
 };
 
-export type UpdateEventParams = {
+export type UpdateProductListingParams = {
   userId: string;
-  event: {
+  productListing: {
     _id: string;
     title: string;
-    imageUrl: string;
     description: string;
-    location: string;
-    startDateTime: Date;
-    endDateTime: Date;
-    categoryId: string;
+    imageUrl: string;
     price: string;
-    isFree: boolean;
-    url: string;
+    currency: string;
+    categoryId: string;
+    condition: string;
+    brand?: string;
+    productModel?: string;
+    deliveryOptions: string;
+    quantity: number;
+    location: string;
+    isAvailable: boolean;
+    isNegotiable: boolean;
   };
   path: string;
 };
 
-export type DeleteEventParams = {
-  eventId: string;
+export type DeleteProductListingParams = {
+  productListingId: string;
   path: string;
 };
 
-export type GetAllEventsParams = {
+export type GetAllProductListingsParams = {
   query: string;
   category: string;
   limit: number;
@@ -64,31 +72,35 @@ export type GetAllEventsParams = {
   location: string;
 };
 
-export type GetEventsByUserParams = {
+export type GetProductListingsByUserParams = {
   userId: string;
   limit?: number;
   page: number;
 };
 
-export type GetRelatedEventsByCategoryParams = {
+export type GetRelatedProductListingsByUserParams = {
   categoryId: string;
-  eventId: string;
+  productListingId: string;
   limit?: number;
   page: number | string;
 };
 
-export type Event = {
+export type ProductListing = {
   _id: string;
   title: string;
   description: string;
-  price: string;
-  isFree: boolean;
   imageUrl: string;
+  price: string;
+  currency: string;
+  condition: string;
+  brand?: string;
+  productModel?: string;
+  deliveryOptions: string;
+  quantity: number;
   location: string;
-  startDateTime: Date;
-  endDateTime: Date;
-  url: string;
-  organizer: {
+  isAvailable: boolean;
+  isNegotiable: boolean;
+  seller: {
     _id: string;
     firstName: string;
     lastName: string;
@@ -97,6 +109,8 @@ export type Event = {
     _id: string;
     name: string;
   };
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 // ====== CATEGORY PARAMS
@@ -106,23 +120,24 @@ export type CreateCategoryParams = {
 
 // ====== ORDER PARAMS
 export type CheckoutOrderParams = {
-  eventTitle: string;
-  eventId: string;
+  productListingTitle: string;
+  productListingId: string;
   price: string;
-  isFree: boolean;
+  quantity: number;
   buyerId: string;
 };
 
 export type CreateOrderParams = {
   stripeId: string;
-  eventId: string;
+  productListingId: string;
   buyerId: string;
+  quantity: string;
   totalAmount: string;
   createdAt: Date;
 };
 
-export type GetOrdersByEventParams = {
-  eventId: string;
+export type GetOrdersByProductListingsParams = {
+  productListingId: string;
   searchString: string;
 };
 
@@ -146,5 +161,5 @@ export type RemoveUrlQueryParams = {
 
 export type SearchParamProps = {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>; 
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };

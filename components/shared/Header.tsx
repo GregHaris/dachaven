@@ -26,7 +26,7 @@ export const Header = () => {
           />
         </Link>
 
-        {(pathname === '/' || pathname === '/events') && (
+        {(pathname === '/' || pathname === '/productListings') && (
           <div className="hidden halfwayFlex flex-1 justify-center mx-4">
             <div className="flex w-full max-w-2xl items-center bg-[#F8F7FA] rounded-full shadow-sm">
               <SearchByName />
@@ -59,7 +59,7 @@ export const Header = () => {
         </div>
       </div>
 
-      {(pathname === '/' || pathname === '/events') && (
+      {(pathname === '/' || pathname === '/productListings') && (
         <div className="wrapper halfwayHidden">
           <div className="flex w-full items-center bg-[#F8F7FA] rounded-full shadow-sm">
             <SearchByName />

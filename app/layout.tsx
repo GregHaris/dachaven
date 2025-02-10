@@ -12,7 +12,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: 'Vitiket',
-  description: 'An Event management app',
+  description: 'An Ecommerce app',
   icons: '/assets/images/logo.png',
 };
 

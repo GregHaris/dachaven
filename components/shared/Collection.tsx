@@ -1,16 +1,16 @@
-import { IEvent } from '@/lib/database/models/event.model';
+import { IProductListing } from '@/lib/database/models/productListing.model';
 import Card from './Card';
 import Pagination from './Pagination';
 
 type CollectionProps = {
-  data: IEvent[];
+  data: IProductListing[];
   emptyTitle: string;
   emptyStateSubtext: string;
-  limit: number; 
+  limit: number;
   page: number | string;
   totalPages?: number;
   urlParamName?: string;
-  collectionType?: 'Events_Organized' | 'My_Tickets' | 'All_Events';
+  collectionType?: 'Products_Listed' | 'My_Purchases' | 'All_Listings';
 };
 
 const Collection = ({
@@ -27,14 +27,15 @@ const Collection = ({
       {data.length > 0 ? (
         <div className="flex flex-col items-center gap-10">
           <ul className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
-            {data.map((event) => {
-              const hasOrderLink = collectionType === 'Events_Organized';
-              const hidePrice = collectionType === 'My_Tickets';
+            {data.map((productListing) => {
+              if (!productListing || !productListing._id) return null;
+              const hasOrderLink = collectionType === 'Products_Listed';
+              const hidePrice = collectionType === 'My_Purchases';
 
               return (
-                <li key={event._id} className="flex justify-center">
+                <li key={productListing._id} className="flex justify-center">
                   <Card
-                    event={event}
+                    productListing={productListing}
                     hasOrderLink={hasOrderLink}
                     hidePrice={hidePrice}
                   />
@@ -42,7 +43,6 @@ const Collection = ({
               );
             })}
           </ul>
-
           {totalPages && totalPages > 1 && (
             <Pagination
               urlParamName={urlParamName}

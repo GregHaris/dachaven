@@ -4,11 +4,15 @@ import { SignedIn, SignedOut, SignInButton, useUser } from '@clerk/nextjs';
 import { useState, useEffect } from 'react';
 
 import { Button } from '../ui/button';
-import { IEvent } from '@/lib/database/models/event.model';
-import { hasUserPurchasedEvent } from '@/lib/actions/order.actions';
+import { IProductListing } from '@/lib/database/models/productListing.model';
+import { hasUserPurchasedProductListings } from '@/lib/actions/order.actions';
 import Checkout from './Checkout';
 
-const CheckoutButton = ({ event }: { event: IEvent }) => {
+const CheckoutButton = ({
+  productListing,
+}: {
+  productListing: IProductListing;
+}) => {
   const { isLoaded, user } = useUser();
   const [hasPurchased, setHasPurchased] = useState(false);
 
@@ -16,26 +20,31 @@ const CheckoutButton = ({ event }: { event: IEvent }) => {
     const checkPurchase = async () => {
       if (user) {
         const userId = user.publicMetadata.userId as string;
-        const purchased = await hasUserPurchasedEvent(userId, event._id);
+        const purchased = await hasUserPurchasedProductListings(
+          userId,
+          productListing._id
+        );
         setHasPurchased(purchased ?? false);
       }
     };
 
     checkPurchase();
-  }, [user, event._id]);
+  }, [user, productListing._id]);
 
   if (!isLoaded) {
     return <div>Loading...</div>;
   }
 
   const userId = user?.publicMetadata.userId as string;
-  const isEventCreator = userId === event.organizer._id.toString();
-  const hasEventFinished = new Date(event.endDateTime) < new Date();
+  const isProductListingsCreator =
+    userId === productListing.seller._id.toString();
+  const hasProductListingsFinished =
+    new Date(productListing.endDateTime) < new Date();
 
   return (
-    !isEventCreator && (
+    !isProductListingsCreator && (
       <div className="flex item-center gap-3">
-        {hasEventFinished ? (
+        {hasProductListingsFinished ? (
           <p className="p-2 text-red-400">
             Sorry, tickets are no longer available.
           </p>
@@ -56,7 +65,7 @@ const CheckoutButton = ({ event }: { event: IEvent }) => {
             </SignedOut>
 
             <SignedIn>
-              <Checkout event={event} userId={userId} />
+              <Checkout productListing={productListing} userId={userId} />
             </SignedIn>
           </>
         )}

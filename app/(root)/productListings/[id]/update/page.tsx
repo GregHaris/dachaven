@@ -1,17 +1,15 @@
-import EventForm from '@shared/EventForm';
+import ProductListingsForm from '@/components/shared/ProductListingForm';
 import { auth } from '@clerk/nextjs/server';
-import { getEventById } from '@/lib/actions/event.actions';
+import { getProductListingById } from '@/lib/actions/productListing.actions';
 
-type UpdateEventProps = {
+type UpdateProductListingsProps = {
   params: Promise<{ id: string }>;
 };
 
-const UpdateEvent = async (props: UpdateEventProps) => {
+const UpdateProductListings = async (props: UpdateProductListingsProps) => {
   const params = await props.params;
 
-  const {
-    id
-  } = params;
+  const { id } = params;
 
   const { sessionClaims } = await auth();
 
@@ -21,26 +19,26 @@ const UpdateEvent = async (props: UpdateEventProps) => {
   // Access userId from the nested object
   const userId = claims?.userId?.userId as string;
 
-  const event = await getEventById(id);
+  const productListing = await getProductListingById(id);
 
   return (
     <>
       {' '}
       <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
         <h3 className="wrapper h3-bold text-center sm:text-left">
-          Update Event
+          Update ProductListings
         </h3>
       </section>
       <div className="wrapper my-8">
-        <EventForm
+        <ProductListingsForm
           userId={userId}
           type="Update"
-          event={event}
-          eventId={event._id}
+          productListing={productListing}
+          productListingId={productListing._id}
         />
       </div>
     </>
   );
 };
 
-export default UpdateEvent;
+export default UpdateProductListings;

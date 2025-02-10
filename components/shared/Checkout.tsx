@@ -3,11 +3,17 @@ import { loadStripe } from '@stripe/stripe-js';
 
 import { Button } from '../ui/button';
 import { checkoutOrder } from '@/lib/actions/order.actions';
-import { IEvent } from '@/lib/database/models/event.model';
+import { IProductListing } from '@/lib/database/models/productListing.model';
 
 loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
-const Checkout = ({ event, userId }: { event: IEvent; userId: string }) => {
+const Checkout = ({
+  productListing,
+  userId,
+}: {
+  productListing: IProductListing;
+  userId: string;
+}) => {
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
@@ -24,11 +30,11 @@ const Checkout = ({ event, userId }: { event: IEvent; userId: string }) => {
 
   const onCheckout = async () => {
     const order = {
-      eventTitle: event.title,
+      productListingTitle: productListing.title,
       buyerId: userId,
-      eventId: event._id,
-      price: event.price,
-      isFree: event.isFree,
+      productListingId: productListing._id,
+      price: productListing.price,
+      quantity: productListing.quantity,
     };
 
     await checkoutOrder(order);
@@ -36,7 +42,7 @@ const Checkout = ({ event, userId }: { event: IEvent; userId: string }) => {
   return (
     <form action={onCheckout}>
       <Button type="submit" role="link" size="lg" className="button sm:w-fit">
-        {event.isFree ? 'Get Ticket' : 'Buy Ticket'}
+        {'Buy'}
       </Button>
     </form>
   );

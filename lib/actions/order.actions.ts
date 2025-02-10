@@ -7,20 +7,20 @@ import Stripe from 'stripe';
 import {
   CheckoutOrderParams,
   CreateOrderParams,
-  GetOrdersByEventParams,
+  GetOrdersByProductListingsParams,
   GetOrdersByUserParams,
 } from '@/types';
 
 import { connectToDatabase } from '../database';
 import { handleError } from '../utils';
-import Event from '../database/models/event.model';
+import ProductListings from '../database/models/productListing.model';
 import Order from '../database/models/order.model';
 import User from '../database/models/user.model';
 
 export const checkoutOrder = async (order: CheckoutOrderParams) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
-  const price = order.isFree ? 0 : Number(order.price) * 100;
+  const price = Number(order.price) * 100;
 
   try {
     // Create Checkout Sessions from body params.
@@ -31,14 +31,14 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
             currency: 'usd',
             unit_amount: price,
             product_data: {
-              name: order.eventTitle,
+              name: order.productListingTitle,
             },
           },
           quantity: 1,
         },
       ],
       metadata: {
-        eventId: order.eventId,
+        productListingId: order.productListingId,
         buyerId: order.buyerId,
       },
       mode: 'payment',
@@ -61,9 +61,10 @@ export const createOrder = async (order: CreateOrderParams) => {
 
     const newOrder = await Order.create({
       ...order,
-      event: order.eventId,
+      productListing: order.productListingId,
       buyer: order.buyerId,
       buyerEmail: user.email,
+      quantity: order.quantity
     });
 
     return JSON.parse(JSON.stringify(newOrder));
@@ -72,14 +73,17 @@ export const createOrder = async (order: CreateOrderParams) => {
   }
 };
 
-export const hasUserPurchasedEvent = async (
+export const hasUserPurchasedProductListings = async (
   userId: string,
-  eventId: string
+  productListingId: string
 ) => {
   try {
     await connectToDatabase();
 
-    const order = await Order.findOne({ buyer: userId, event: eventId });
+    const order = await Order.findOne({
+      buyer: userId,
+      productListing: productListingId,
+    });
 
     return !!order;
   } catch (error) {
@@ -87,16 +91,16 @@ export const hasUserPurchasedEvent = async (
   }
 };
 
-// GET ORDERS BY EVENT
-export async function getOrdersByEvent({
+// GET ORDERS BY PRODUCT LISTING
+export async function getOrdersByProductListings({
   searchString,
-  eventId,
-}: GetOrdersByEventParams) {
+  productListingId,
+}: GetOrdersByProductListingsParams) {
   try {
     await connectToDatabase();
 
-    if (!eventId) throw new Error('Event ID is required');
-    const eventObjectId = new ObjectId(eventId);
+    if (!productListingId) throw new Error('ProductListings ID is required');
+    const productListingObjectId = new ObjectId(productListingId);
 
     const orders = await Order.aggregate([
       {
@@ -112,22 +116,22 @@ export async function getOrdersByEvent({
       },
       {
         $lookup: {
-          from: 'events',
-          localField: 'event',
+          from: 'productListings',
+          localField: 'productListing',
           foreignField: '_id',
-          as: 'event',
+          as: 'productListing',
         },
       },
       {
-        $unwind: '$event',
+        $unwind: '$productListing',
       },
       {
         $project: {
           _id: 1,
           totalAmount: 1,
           createdAt: 1,
-          eventTitle: '$event.title',
-          eventId: '$event._id',
+          productListingTitle: '$productListing.title',
+          productListingId: '$productListing._id',
           buyer: {
             $concat: ['$buyer.firstName', ' ', '$buyer.lastName'],
           },
@@ -137,7 +141,7 @@ export async function getOrdersByEvent({
       {
         $match: {
           $and: [
-            { eventId: eventObjectId },
+            { productListingId: productListingObjectId },
             { buyer: { $regex: RegExp(searchString, 'i') } },
           ],
         },
@@ -162,24 +166,24 @@ export async function getOrdersByUser({
     const skipAmount = (Number(page) - 1) * limit;
     const conditions = { buyer: userId };
 
-    const orders = await Order.distinct('event._id')
+    const orders = await Order.distinct('productListing._id')
       .find(conditions)
       .sort({ createdAt: 'desc' })
       .skip(skipAmount)
       .limit(limit)
       .populate({
-        path: 'event',
-        model: Event,
+        path: 'productListing',
+        model: ProductListings,
         populate: {
-          path: 'organizer',
+          path: 'seller',
           model: User,
           select: '_id firstName lastName',
         },
       });
 
-    const ordersCount = await Order.distinct('event._id').countDocuments(
-      conditions
-    );
+    const ordersCount = await Order.distinct(
+      'productListing._id'
+    ).countDocuments(conditions);
 
     return {
       data: JSON.parse(JSON.stringify(orders)),

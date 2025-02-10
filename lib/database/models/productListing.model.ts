@@ -1,0 +1,48 @@
+import { Document, Schema, model, models } from 'mongoose';
+
+export interface IProductListing extends Document {
+  _id: string;
+  title: string;
+  description?: string;
+  imageUrl: string;
+  price: string;
+  currency: string;
+  category: { _id: string; name: string };
+  seller: { _id: string; firstName: string; lastName: string };
+  createdAt: Date;
+  updatedAt: Date;
+  condition: string; // "New", "Used - Like New", etc.
+  brand?: string;
+  productModel?: string;
+  deliveryOptions: string;
+  quantity: number;
+  location: string;
+  isAvailable: boolean;
+  isNegotiable: boolean;
+}
+
+const ProductListingSchema = new Schema<IProductListing>({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  price: { type: String, required: true, default: '0' },
+  currency: { type: String, required: true, default: 'NGN' },
+  category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
+  seller: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  condition: { type: String, required: true },
+  brand: { type: String },
+  productModel: { type: String },
+  deliveryOptions: { type: String, required: true },
+  quantity: { type: Number, required: true, default: 0 },
+  location: { type: String, required: true },
+  isAvailable: { type: Boolean, default: true },
+  isNegotiable: { type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now, required: true },
+  updatedAt: { type: Date, default: Date.now, required: true },
+});
+
+const ProductListing =
+  models.ProductListing ||
+  model<IProductListing>('ProductListing', ProductListingSchema);
+
+export default ProductListing;

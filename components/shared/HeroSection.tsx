@@ -32,7 +32,7 @@ function HeroContent({
           size="lg"
           className=" button bg-primary-500 cursor-pointer p-regular-16"
         >
-          <Link href={'/events'}>{hero.cta}</Link>
+          <Link href={'/productListings'}>{hero.cta}</Link>
         </Button>
       </div>
     </div>
