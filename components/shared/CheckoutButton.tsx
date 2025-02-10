@@ -29,7 +29,7 @@ const CheckoutButton = ({
       <div className="flex item-center gap-3">
         {!isProductAvailable ? (
           <p className="p-2 text-red-400">
-            Sorry, tickets are no longer available.
+            Sorry, this product is no longer available.
           </p>
         ) : (
           <>
