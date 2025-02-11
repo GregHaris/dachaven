@@ -28,7 +28,7 @@ export interface IProductListing extends Document {
   };
 }
 
-const ProductListingSchema = new Schema<IProductListing>({
+const ProductListingSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   imageUrls: { type: [String], required: true },
