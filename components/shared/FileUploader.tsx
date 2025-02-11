@@ -1,66 +1,78 @@
 'use client';
 
-import { useCallback, Dispatch, SetStateAction } from 'react';
-import { useDropzone } from '@uploadthing/react';
+import { useCallback, useState, useRef, Dispatch, SetStateAction } from 'react';
+import { useDropzone } from 'react-dropzone';
+import { useUploadThing } from '@/lib/uploadthing';
 import { generateClientDropzoneAccept } from 'uploadthing/client';
-import Image from 'next/image';
-
-import { Button } from '@/components/ui/button';
-import { convertFileToUrl } from '@/lib/utils';
+import { Button } from '@ui/button';
 
 type FileUploaderProps = {
-  onFieldChange: (url: string) => void;
-  imageUrl: string;
+  imageUrls: string[];
+  onFieldChange: (...event: any[]) => void;
   setFiles: Dispatch<SetStateAction<File[]>>;
 };
 
 export default function FileUploader({
-  imageUrl,
+  imageUrls,
   onFieldChange,
   setFiles,
 }: FileUploaderProps) {
+  const [files, setFilesState] = useState<File[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      setFiles(acceptedFiles);
-      onFieldChange(convertFileToUrl(acceptedFiles[0]));
+      const newFiles = [...files, ...acceptedFiles];
+      const totalSize = newFiles.reduce((acc, file) => acc + file.size, 0);
+
+      if (newFiles.length > 6 || totalSize > 128 * 1024 * 1024) {
+        alert('Maximum 6 files and total size of 128MB allowed.');
+        return;
+      }
+
+      setFilesState(newFiles);
+      setFiles(newFiles);
     },
-    [setFiles, onFieldChange]
+    [files, setFiles]
   );
 
-  const { getRootProps, getInputProps } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: generateClientDropzoneAccept(['image/*']),
   });
 
-  return (
-    <div {...getRootProps()} className="file-uploader flex-center">
-      <input {...getInputProps()} className="cursor-pointer" />
+  const handleAddMoreFiles = () => {
+    fileInputRef.current?.click();
+  };
 
-      {imageUrl ? (
-        <div className="flex h-full w-full flex-1 justify-center ">
-          <Image
-            src={imageUrl}
-            alt="image"
-            width={250}
-            height={250}
-            className="w-full object-cover object-center"
-          />
-        </div>
-      ) : (
-        <div className="flex-center flex-col py-5 text-grey-500">
-          <Image
-            src="/assets/icons/upload.svg"
-            width={77}
-            height={77}
-            alt="file upload"
-          />
-          <h3 className="mb-2 mt-2">Drag photo here</h3>
-          <p className="p-medium-12 mb-4">JPEG, PNG, JPG</p>
-          <Button type="button" className="rounded-full cursor-pointer">
-            Select from computer
-          </Button>
+  return (
+    <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+      <div
+        {...getRootProps()}
+        className={`p-8 border-2 border-dashed rounded-lg text-center cursor-pointer ${
+          isDragActive ? 'border-primary bg-primary/10' : 'border-gray-300'
+        }`}
+      >
+        <input {...getInputProps()} ref={fileInputRef} />
+        {isDragActive ? (
+          <p>Drop the files here ...</p>
+        ) : (
+          <p>Drag 'n' drop some files here, or click to select files</p>
+        )}
+      </div>
+      {files.length > 0 && (
+        <div className="mt-4">
+          <h3 className="text-lg font-semibold mb-2">Selected Files:</h3>
+          <ul className="list-disc pl-5 mb-4">
+            {files.map((file, index) => (
+              <li key={index}>{file.name}</li>
+            ))}
+          </ul>
         </div>
       )}
+      <Button onClick={handleAddMoreFiles} className="w-full mt-3">
+        {files.length > 0 ? 'Add More Files' : 'Add Files'}
+      </Button>
     </div>
   );
 }
