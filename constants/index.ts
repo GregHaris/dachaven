@@ -42,7 +42,7 @@ export const heroContent = [
 export const productListingDefaultValues = {
   title: '',
   description: '',
-  imageUrls: '',
+  imageUrls: [],
   price: '',
   currency: 'NGN',
   categoryId: '',
@@ -54,6 +54,13 @@ export const productListingDefaultValues = {
   location: '',
   isAvailable: false,
   isNegotiable: false,
+  contactDetails: {
+    phoneNumber: '',
+    website: '',
+    instagram: '',
+    facebook: '',
+    x: '',
+  },
 };
 
 export const categories = [
