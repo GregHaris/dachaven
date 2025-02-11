@@ -21,7 +21,7 @@ export type CreateProductListingParams = {
   productListing: {
     title: string;
     description: string;
-    imageUrl: string;
+    imageUrls: string[];
     price: string;
     currency: string;
     categoryId: string;
@@ -50,7 +50,7 @@ export type UpdateProductListingParams = {
     _id: string;
     title: string;
     description: string;
-    imageUrl: string;
+    imageUrls: string[];
     price: string;
     currency: string;
     categoryId: string;
@@ -103,7 +103,7 @@ export type ProductListing = {
   _id: string;
   title: string;
   description: string;
-  imageUrl: string;
+  imageUrls: string[];
   price: string;
   currency: string;
   condition: string;
