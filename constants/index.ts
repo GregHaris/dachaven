@@ -70,3 +70,9 @@ export const categories = [
 ];
 
 export const currencies = ['NGN', 'USD', 'EUR'];
+
+export const productCondition = [
+  'New', 'Used - Like New', 'Used - Good', 'Used - fair'
+]
+
+export const deliveryOptions = ['Pickup', 'Home Delivery', 'Mail', 'Online']
