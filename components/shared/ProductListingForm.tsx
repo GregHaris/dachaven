@@ -11,8 +11,12 @@ import type { z } from 'zod';
 import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
+import {
+  categories,
+  currencies,
+  productListingDefaultValues,
+} from '@/constants';
 import { Checkbox } from '@/components/ui/checkbox';
-import FileUploader from './FileUploader';
 import {
   createProductListing,
   updateProductListing,
@@ -35,8 +39,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { productListingDefaultValues } from '@/constants';
 import { productListingFormSchema } from '@/lib/validator/index';
+import FileUploader from './FileUploader';
 import TiptapEditor from './TiptapEditor';
 
 type ProductListingFormProps = {
@@ -257,9 +261,11 @@ export default function ProductListingForm({
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="NGN">NGN</SelectItem>
-                            <SelectItem value="USD">USD</SelectItem>
-                            <SelectItem value="EUR">EUR</SelectItem>
+                            {currencies.map((currency) => (
+                              <SelectItem key={currency} value={currency}>
+                                {currency}
+                              </SelectItem>
+                            ))}
                           </SelectContent>
                         </Select>
                         <FormMessage />
@@ -285,11 +291,11 @@ export default function ProductListingForm({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="electronics">
-                            Electronics
-                          </SelectItem>
-                          <SelectItem value="clothing">Clothing</SelectItem>
-                          <SelectItem value="home">Home & Garden</SelectItem>
+                          {categories.map((category) => (
+                            <SelectItem key={category} value={category}>
+                              {category}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -379,8 +385,7 @@ export default function ProductListingForm({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium">
-                        Delivery Options{' '}
-                        <span className="text-red-400">*</span>
+                        Delivery Options <span className="text-red-400">*</span>
                       </FormLabel>
                       <Select
                         onValueChange={field.onChange}
