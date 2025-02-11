@@ -613,8 +613,15 @@ export default function ProductListingForm({
                   />
                 </div>
 
-                <Button type="submit" className="button w-full">
-                  {type === 'Create' ? 'Create Listing' : 'Update Listing'}
+                <Button
+                  type="submit"
+                  size={'lg'}
+                  className="button w-full"
+                  disabled={form.formState.isSubmitting}
+                >
+                  {form.formState.isSubmitting
+                    ? 'Submitting...'
+                    : `${type} Listing`}
                 </Button>
               </form>
             </Form>
