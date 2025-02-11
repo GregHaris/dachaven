@@ -1,12 +1,14 @@
 'use client';
 
-import { useState } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { FiPhone } from 'react-icons/fi';
+import { RiLink } from 'react-icons/ri';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { useState } from 'react';
 import { useUploadThing } from '@/lib/uploadthing';
+import { zodResolver } from '@hookform/resolvers/zod';
 import type { z } from 'zod';
+import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -163,13 +165,13 @@ export default function ProductListingForm({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium">
-                        Title <span className="text-coral-400">*</span>
+                        Title <span className="text-red-400">*</span>
                       </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Product title"
                           {...field}
-                          className="input-field p-regular-16"
+                          className="input-field p-regular-14"
                         />
                       </FormControl>
                       <FormMessage />
@@ -183,7 +185,7 @@ export default function ProductListingForm({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium">
-                        Description <span className="text-coral-400">*</span>
+                        Description <span className="text-red-400">*</span>
                       </FormLabel>
                       <FormControl>
                         <TiptapEditor
@@ -202,7 +204,7 @@ export default function ProductListingForm({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium">
-                        Image <span className="text-coral-400">*</span>
+                        Image <span className="text-red-400">*</span>
                       </FormLabel>
                       <FormControl>
                         <FileUploader
@@ -223,13 +225,13 @@ export default function ProductListingForm({
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium">
-                          Price <span className="text-coral-400">*</span>
+                          Price <span className="text-red-400">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="0.00"
                             {...field}
-                            className="input-field p-regular-16"
+                            className="input-field p-regular-14"
                           />
                         </FormControl>
                         <FormMessage />
@@ -243,14 +245,14 @@ export default function ProductListingForm({
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium">
-                          Currency <span className="text-coral-400">*</span>
+                          Currency <span className="text-red-400">*</span>
                         </FormLabel>
                         <Select
                           onValueChange={field.onChange}
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger className="select-field p-regular-16">
+                            <SelectTrigger className="select-field p-regular-14">
                               <SelectValue placeholder="Select currency" />
                             </SelectTrigger>
                           </FormControl>
@@ -271,14 +273,14 @@ export default function ProductListingForm({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium">
-                        Category <span className="text-coral-400">*</span>
+                        Category <span className="text-red-400">*</span>
                       </FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="select-field p-regular-16">
+                          <SelectTrigger className="select-field p-regular-14">
                             <SelectValue placeholder="Select a category" />
                           </SelectTrigger>
                         </FormControl>
@@ -300,14 +302,14 @@ export default function ProductListingForm({
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium">
-                        Condition <span className="text-coral-400">*</span>
+                        Condition <span className="text-red-400">*</span>
                       </FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="select-field p-regular-16">
+                          <SelectTrigger className="select-field p-regular-14">
                             <SelectValue placeholder="Select condition" />
                           </SelectTrigger>
                         </FormControl>
@@ -342,7 +344,7 @@ export default function ProductListingForm({
                           <Input
                             placeholder="Brand name"
                             {...field}
-                            className="input-field p-regular-16"
+                            className="input-field p-regular-14"
                           />
                         </FormControl>
                         <FormMessage />
@@ -362,7 +364,7 @@ export default function ProductListingForm({
                           <Input
                             placeholder="Product model"
                             {...field}
-                            className="input-field p-regular-16"
+                            className="input-field p-regular-14"
                           />
                         </FormControl>
                         <FormMessage />
@@ -378,14 +380,14 @@ export default function ProductListingForm({
                     <FormItem>
                       <FormLabel className="text-sm font-medium">
                         Delivery Options{' '}
-                        <span className="text-coral-400">*</span>
+                        <span className="text-red-400">*</span>
                       </FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="select-field p-regular-16">
+                          <SelectTrigger className="select-field p-regular-14">
                             <SelectValue placeholder="Select delivery option" />
                           </SelectTrigger>
                         </FormControl>
@@ -408,7 +410,7 @@ export default function ProductListingForm({
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium">
-                          Quantity <span className="text-coral-400">*</span>
+                          Quantity <span className="text-red-400">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -419,7 +421,7 @@ export default function ProductListingForm({
                                 Number.parseInt(e.target.value, 10)
                               )
                             }
-                            className="input-field p-regular-16 hide-number-spinners"
+                            className="input-field p-regular-14 hide-number-spinners"
                           />
                         </FormControl>
                         <FormMessage />
@@ -433,13 +435,13 @@ export default function ProductListingForm({
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium">
-                          Location <span className="text-coral-400">*</span>
+                          Location <span className="text-red-400">*</span>
                         </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="City, State"
                             {...field}
-                            className="input-field p-regular-16"
+                            className="input-field p-regular-14"
                           />
                         </FormControl>
                         <FormMessage />
@@ -501,15 +503,15 @@ export default function ProductListingForm({
                     name="contactDetails.phoneNumber"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium">
-                          Phone Number <span className="text-coral-400">*</span>
-                        </FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Your phone number"
-                            {...field}
-                            className="h-11 border-gray-200 focus:border-coral-400 focus:ring-coral-400"
-                          />
+                          <div className="flex-center h-[54px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
+                            <FiPhone />
+                            <Input
+                              placeholder="Your phone number"
+                              {...field}
+                              className="contact-details-input-field p-regular-14"
+                            />
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -520,15 +522,15 @@ export default function ProductListingForm({
                     name="contactDetails.website"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium">
-                          Website
-                        </FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="www.example.com"
-                            {...field}
-                            className="h-11 border-gray-200 focus:border-coral-400 focus:ring-coral-400"
-                          />
+                          <div className="flex-center h-[54px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
+                            <RiLink />
+                            <Input
+                              placeholder="www.example.com"
+                              {...field}
+                              className="contact-details-input-field p-regular-14"
+                            />
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -539,15 +541,20 @@ export default function ProductListingForm({
                     name="contactDetails.instagram"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium">
-                          Instagram
-                        </FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Your Instagram handle"
-                            {...field}
-                            className="h-11 border-gray-200 focus:border-coral-400 focus:ring-coral-400"
-                          />
+                          <div className="flex-center h-[54px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
+                            <Image
+                              src="/assets/icons/instagram.svg"
+                              width={20}
+                              height={20}
+                              alt="calendar"
+                            />
+                            <Input
+                              placeholder="Your Instagram handle"
+                              {...field}
+                              className="contact-details-input-field p-regular-14"
+                            />
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -558,15 +565,20 @@ export default function ProductListingForm({
                     name="contactDetails.facebook"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium">
-                          Facebook
-                        </FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Your Facebook handle"
-                            {...field}
-                            className="h-11 border-gray-200 focus:border-coral-400 focus:ring-coral-400"
-                          />
+                          <div className="flex-center h-[54px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
+                            <Image
+                              src="/assets/icons/facebook.svg"
+                              width={20}
+                              height={20}
+                              alt="calendar"
+                            />
+                            <Input
+                              placeholder="Your Facebook handle"
+                              {...field}
+                              className="contact-details-input-field p-regular-14"
+                            />
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -577,13 +589,20 @@ export default function ProductListingForm({
                     name="contactDetails.x"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium">X</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Your X(Twitter) handle"
-                            {...field}
-                            className="h-11 border-gray-200 focus:border-coral-400 focus:ring-coral-400"
-                          />
+                          <div className="flex-center h-[54px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
+                            <Image
+                              src="/assets/icons/x.svg"
+                              width={20}
+                              height={20}
+                              alt="calendar"
+                            />
+                            <Input
+                              placeholder="Your X (Twitter) handle"
+                              {...field}
+                              className="contact-details-input-field p-regular-14"
+                            />
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
