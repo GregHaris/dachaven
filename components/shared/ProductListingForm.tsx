@@ -14,6 +14,8 @@ import { Button } from '@/components/ui/button';
 import {
   categories,
   currencies,
+  deliveryOptions,
+  productCondition,
   productListingDefaultValues,
 } from '@/constants';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -320,16 +322,11 @@ export default function ProductListingForm({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="New">New</SelectItem>
-                          <SelectItem value="Used - Like New">
-                            Used - Like New
-                          </SelectItem>
-                          <SelectItem value="Used - Good">
-                            Used - Good
-                          </SelectItem>
-                          <SelectItem value="Used - Fair">
-                            Used - Fair
-                          </SelectItem>
+                          {productCondition.map((condition) => (
+                            <SelectItem key={condition} value={condition}>
+                              {condition}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -397,10 +394,11 @@ export default function ProductListingForm({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="Pickup">Pickup</SelectItem>
-                          <SelectItem value="Delivery">Delivery</SelectItem>
-                          <SelectItem value="Mail">Mail</SelectItem>
-                          <SelectItem value="Online">Online</SelectItem>
+                          {deliveryOptions.map((option) => (
+                            <SelectItem key={option} value={option}>
+                              {option}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                       <FormMessage />
