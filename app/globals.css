@@ -125,22 +125,22 @@
   }
   .select-field {
     /* SHADCN OVERRIDES */
-    @apply w-full! bg-grey-50! rounded-md h-[54px]! placeholder:text-gray-500  px-5! py-3! border-gray-300! focus-visible:ring-transparent! focus:ring-transparent!;
+    @apply w-full bg-grey-50  rounded-md h-[40px]  placeholder:text-gray-500  px-5  py-3  border-gray-300  focus-visible:ring-transparent  focus:ring-transparent ;
   }
   .input-field {
-    @apply bg-grey-50 h-[54px] focus-visible:ring-offset-0 placeholder:text-gray-500 rounded-md px-4 py-3 border-gray-300 focus-visible:ring-transparent outline-none shadow-none;
+    @apply bg-grey-50 h-[40px] focus-visible:ring-offset-0 placeholder:text-gray-500 rounded-md px-4 py-3 border-gray-300 focus-visible:ring-transparent outline-none shadow-none;
   }
   .file-uploader {
     @apply flex h-72 align-middle cursor-pointer flex-col overflow-hidden rounded-md bg-grey-50 border border-gray-300;
   }
   .contact-details-input-field {
-     @apply bg-grey-50 h-[54px] focus-visible:ring-offset-0 placeholder:text-gray-500 rounded-md px-4 py-3 border-none focus-visible:ring-transparent outline-none shadow-none;
+     @apply bg-grey-50 h-[40px] focus-visible:ring-offset-0 placeholder:text-gray-500 rounded-md px-4 py-3 border-none focus-visible:ring-transparent outline-none shadow-none;
   }
   .textarea {
     @apply min-h-[150px] cursor-text rounded-md border-none p-5 focus-within:outline-none focus-within:ring-0 bg-grey-50;
   }
   .button {
-    @apply rounded-md h-[54px] cursor-pointer text-primary-50;
+    @apply rounded-md h-[44px] cursor-pointer text-primary-50;
   }
   .select-item {
     @apply py-3 cursor-pointer focus:bg-primary-50;
@@ -151,13 +151,13 @@
 
   .halfwayHidden {
     @media (min-width: 65.7rem) {
-      display: none !important;
+      display: none   !important;
     }
   }
 
   .halfwayFlex {
     @media (width >= 65.7rem) {
-      display: flex !important;
+      display: flex   !important;
     }
   }
 }
@@ -261,7 +261,7 @@
 }
 
 .cl-userButtonPopoverCard {
-  right: 4px !important;
+  right: 4px   !important;
 }
 
 .cl-formButtonPrimary:hover,
@@ -283,13 +283,13 @@
 }
 
 .react-datepicker__day--selected {
-  background-color: #624cf5 !important;
-  color: #ffffff !important;
+  background-color: #624cf5   !important;
+  color: #ffffff   !important;
   border-radius: 4px;
 }
 
 .react-datepicker__time-list-item--selected {
-  background-color: #624cf5 !important;
+  background-color: #624cf5   !important;
 }
 
 .hide-number-spinners {

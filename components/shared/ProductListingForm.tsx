@@ -504,7 +504,7 @@ export default function ProductListingForm({
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <div className="flex-center h-[54px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
+                          <div className="flex-center h-[40px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
                             <FiPhone />
                             <Input
                               placeholder="Your phone number"
@@ -523,7 +523,7 @@ export default function ProductListingForm({
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <div className="flex-center h-[54px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
+                          <div className="flex-center h-[40px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
                             <RiLink />
                             <Input
                               placeholder="www.example.com"
@@ -542,7 +542,7 @@ export default function ProductListingForm({
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <div className="flex-center h-[54px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
+                          <div className="flex-center h-[40px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
                             <Image
                               src="/assets/icons/instagram.svg"
                               width={20}
@@ -566,7 +566,7 @@ export default function ProductListingForm({
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <div className="flex-center h-[54px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
+                          <div className="flex-center h-[40px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
                             <Image
                               src="/assets/icons/facebook.svg"
                               width={20}
@@ -590,7 +590,7 @@ export default function ProductListingForm({
                     render={({ field }) => (
                       <FormItem>
                         <FormControl>
-                          <div className="flex-center h-[54px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
+                          <div className="flex-center h-[40px] w-full overflow-hidden rounded-md border-gray-300 border bg-grey-50 px-4 py-2">
                             <Image
                               src="/assets/icons/x.svg"
                               width={20}
