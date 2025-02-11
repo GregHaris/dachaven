@@ -47,11 +47,26 @@ export const productListingDefaultValues = {
   currency: 'NGN',
   categoryId: '',
   condition: 'New' as 'New',
-  brand: '', 
-  productModel: '', 
-  deliveryOptions: 'Pickup', 
-  quantity: 0, 
-  location: '', 
+  brand: '',
+  productModel: '',
+  deliveryOptions: 'Pickup',
+  quantity: 0,
+  location: '',
   isAvailable: true,
   isNegotiable: false,
 };
+
+export const categories = [
+  'Arts & Crafts',
+  'Books, Movies & Music',
+  'Beauty & Personal Care',
+  'Clothing, Shoes & Jewelry',
+  'Collectibles',
+  'Electronics',
+  'Health & Household',
+  'Home Goods',
+  'Sports & Outdoors',
+  'Toys & Games',
+];
+
+export const currencies = ['NGN', 'USD', 'EUR'];
