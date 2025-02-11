@@ -6,7 +6,7 @@ export const productListingFormSchema = z.object({
     .string()
     .min(10, { message: 'Description must be at least 10 characters' })
     .max(1500, { message: 'Description must be less than 1500 characters' }),
-  imageUrl: z.string().url({ message: 'Invalid image URL' }),
+  imageUrls: z.array(z.string()),
   price: z.string().min(0, { message: 'Price must be a positive number' }),
   currency: z
     .string()
