@@ -1,23 +1,37 @@
 'use client';
 
-import { useCallback, useState, useRef, Dispatch, SetStateAction } from 'react';
+import {
+  useCallback,
+  useState,
+  useRef,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+} from 'react';
 import { useDropzone } from 'react-dropzone';
 import { generateClientDropzoneAccept } from 'uploadthing/client';
 import { Button } from '@ui/button';
+import { convertFileToUrl } from '@/lib/utils';
 
 type FileUploaderProps = {
   imageUrls: string[];
-  onFieldChange: (...event: any[]) => void;
+  onFieldChange: (...url: string[]) => void;
   setFiles: Dispatch<SetStateAction<File[]>>;
 };
 
 export default function FileUploader({
-  imageUrls,
+  imageUrls = [],
   onFieldChange,
   setFiles,
 }: FileUploaderProps) {
   const [files, setFilesState] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (Array.isArray(imageUrls) && imageUrls.length > 0) {
+      onFieldChange(...imageUrls);
+    }
+  }, [imageUrls, onFieldChange]);
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -29,10 +43,12 @@ export default function FileUploader({
         return;
       }
 
+      const fileUrls = newFiles.map((file) => convertFileToUrl(file));
+      onFieldChange(...fileUrls);
       setFilesState(newFiles);
       setFiles(newFiles);
     },
-    [files, setFiles]
+    [files, setFiles, onFieldChange]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -69,7 +85,27 @@ export default function FileUploader({
           </ul>
         </div>
       )}
-      <Button onClick={handleAddMoreFiles} className="w-full mt-3">
+      {Array.isArray(imageUrls) && imageUrls.length > 0 && (
+        <div className="mt-4">
+          <h3 className="text-lg font-semibold mb-2">Uploaded Images:</h3>
+          <ul className="list-disc pl-5 mb-4">
+            {imageUrls.map((url, index) => (
+              <li key={index}>
+                <img
+                  src={url}
+                  alt={`Uploaded file ${index + 1}`}
+                  className="w-full h-auto"
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <Button
+        type="button"
+        onClick={handleAddMoreFiles}
+        className="w-full mt-3 button"
+      >
         {files.length > 0 ? 'Add More Files' : 'Add Files'}
       </Button>
     </div>

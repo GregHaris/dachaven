@@ -72,8 +72,11 @@ export default function ProductListingForm({
                 name: productListing.category.name,
               }
             : { _id: '', name: '' },
+          imageUrls: Array.isArray(productListing.imageUrls)
+            ? productListing.imageUrls
+            : [],
         }
-      : productListingDefaultValues;
+      : { ...productListingDefaultValues, imageUrls: [] };
 
   const form = useForm<z.infer<typeof productListingFormSchema>>({
     resolver: zodResolver(productListingFormSchema),
