@@ -81,7 +81,7 @@ export default function ProductListingForm({
   });
 
   async function onSubmit(values: z.infer<typeof productListingFormSchema>) {
-    let uploadedImageUrl = values.imageUrl;
+    let uploadedImageUrls: string[] = values.imageUrls;
 
     if (files.length > 0) {
       const uploadedImages = await startUpload(files);
@@ -89,7 +89,7 @@ export default function ProductListingForm({
       if (!uploadedImages) {
         return;
       }
-      uploadedImageUrl = uploadedImages[0].url;
+      uploadedImageUrls = uploadedImages.map((image) => image.url);
     }
 
     const contactDetails = {
@@ -103,7 +103,7 @@ export default function ProductListingForm({
     if (type === 'Create') {
       try {
         const newProductListing = await createProductListing({
-          productListing: { ...values, imageUrl: uploadedImageUrl },
+          productListing: { ...values, imageUrls: uploadedImageUrls },
           userId,
           contactDetails,
           path: '/dashboard',
@@ -128,7 +128,7 @@ export default function ProductListingForm({
           userId,
           productListing: {
             ...values,
-            imageUrl: uploadedImageUrl,
+            imageUrls: uploadedImageUrls,
             _id: productListingId,
           },
           contactDetails,
@@ -206,15 +206,15 @@ export default function ProductListingForm({
 
                 <FormField
                   control={form.control}
-                  name="imageUrl"
+                  name="imageUrls"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm font-medium">
-                        Image <span className="text-red-400">*</span>
+                        Images <span className="text-red-400">*</span>
                       </FormLabel>
                       <FormControl>
                         <FileUploader
-                          imageUrl={field.value}
+                          imageUrls={field.value}
                           onFieldChange={field.onChange}
                           setFiles={setFiles}
                         />
