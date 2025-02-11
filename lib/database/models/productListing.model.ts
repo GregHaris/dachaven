@@ -28,32 +28,33 @@ export interface IProductListing extends Document {
   };
 }
 
-const ProductListingSchema = new Schema({
-  title: { type: String, required: true },
-  description: { type: String, required: true },
-  imageUrls: { type: [String], required: true },
-  price: { type: String, required: true, default: '0' },
-  currency: { type: String, required: true, default: 'NGN' },
-  category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
-  seller: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  condition: { type: String, required: true },
-  brand: { type: String },
-  productModel: { type: String },
-  deliveryOptions: { type: String, required: true },
-  quantity: { type: Number, required: true, default: 0 },
-  location: { type: String, required: true },
-  isAvailable: { type: Boolean, default: true },
-  isNegotiable: { type: Boolean, default: false },
-  contactDetails: {
-    phoneNumber: { type: String, required: true },
-    website: { type: String },
-    instagram: { type: String },
-    facebook: { type: String },
-    x: { type: String },
+const ProductListingSchema = new Schema(
+  {
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    imageUrls: { type: [String], required: true },
+    price: { type: String, required: true, default: '0' },
+    currency: { type: String, required: true, default: 'NGN' },
+    category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
+    seller: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    condition: { type: String, required: true },
+    brand: { type: String },
+    productModel: { type: String },
+    deliveryOptions: { type: String, required: true },
+    quantity: { type: Number, required: true, default: 0 },
+    location: { type: String, required: true },
+    isAvailable: { type: Boolean, default: true },
+    isNegotiable: { type: Boolean, default: false },
+    contactDetails: {
+      phoneNumber: { type: String, required: true },
+      website: { type: String },
+      instagram: { type: String },
+      facebook: { type: String },
+      x: { type: String },
+    },
   },
-  createdAt: { type: Date, default: Date.now, required: true },
-  updatedAt: { type: Date, default: Date.now, required: true },
-});
+  { timestamps: true }
+);
 
 const ProductListing =
   models.ProductListing ||

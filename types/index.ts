@@ -123,8 +123,6 @@ export type ProductListing = {
     _id: string;
     name: string;
   };
-  createdAt: Date;
-  updatedAt: Date;
   contactDetails: {
     phoneNumber: string;
     website?: string;
