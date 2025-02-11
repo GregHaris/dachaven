@@ -29,7 +29,7 @@ const Card = async ({ productListing, hasOrderLink, hidePrice }: CardProps) => {
     <div className="group relative flex min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[438px]">
       <Link
         href={`/productListings/${productListing._id}`}
-        style={{ backgroundImage: `url(${productListing.imageUrl})` }}
+        style={{ backgroundImage: `url(${productListing.imageUrls})` }}
         className="flex-center flex-grow bg-gray-50 bg-cover bg-center text-gray-500"
       />
       {isProductListingsCreator && !hidePrice && (
