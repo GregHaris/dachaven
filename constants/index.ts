@@ -52,7 +52,7 @@ export const productListingDefaultValues = {
   deliveryOptions: 'Pickup',
   quantity: 0,
   location: '',
-  isAvailable: true,
+  isAvailable: false,
   isNegotiable: false,
 };
 
