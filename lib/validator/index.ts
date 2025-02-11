@@ -24,7 +24,15 @@ export const productListingFormSchema = z.object({
     .min(3, { message: 'Location must be at least 3 characters' }),
   isAvailable: z.boolean(),
   isNegotiable: z.boolean(),
+  contactDetails: z.object({
+    phoneNumber: z
+      .string()
+      .min(10, { message: 'Phone number must be at least 10 characters' }),
+    website: z.string().url({ message: 'Invalid website URL' }).optional(),
+    instagram: z.string().optional(),
+    facebook: z.string().optional(),
+    x: z.string().optional(),
+  }),
 });
 
 export type ProductListingFormValues = z.infer<typeof productListingFormSchema>;
-

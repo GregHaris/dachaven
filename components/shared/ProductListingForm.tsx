@@ -84,11 +84,20 @@ export default function ProductListingForm({
       uploadedImageUrl = uploadedImages[0].url;
     }
 
+    const contactDetails = {
+      phoneNumber: values.contactDetails.phoneNumber,
+      website: values.contactDetails.website,
+      instagram: values.contactDetails.instagram,
+      facebook: values.contactDetails.facebook,
+      x: values.contactDetails.x,
+    };
+
     if (type === 'Create') {
       try {
         const newProductListing = await createProductListing({
           productListing: { ...values, imageUrl: uploadedImageUrl },
           userId,
+          contactDetails,
           path: '/dashboard',
         });
 
@@ -114,6 +123,7 @@ export default function ProductListingForm({
             imageUrl: uploadedImageUrl,
             _id: productListingId,
           },
+          contactDetails,
           path: `/productListings/${productListingId}`,
         });
 
@@ -484,10 +494,104 @@ export default function ProductListingForm({
                   />
                 </div>
 
-                <Button
-                  type="submit"
-                  className="button w-full"
-                >
+                <div className="space-y-6 py-10">
+                  <h3 className="text-lg font-semibold">Contact Details</h3>
+                  <FormField
+                    control={form.control}
+                    name="contactDetails.phoneNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium">
+                          Phone Number <span className="text-coral-400">*</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Your phone number"
+                            {...field}
+                            className="h-11 border-gray-200 focus:border-coral-400 focus:ring-coral-400"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />{' '}
+                  <FormField
+                    control={form.control}
+                    name="contactDetails.website"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium">
+                          Website
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="www.example.com"
+                            {...field}
+                            className="h-11 border-gray-200 focus:border-coral-400 focus:ring-coral-400"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="contactDetails.instagram"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium">
+                          Instagram
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Your Instagram handle"
+                            {...field}
+                            className="h-11 border-gray-200 focus:border-coral-400 focus:ring-coral-400"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="contactDetails.facebook"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium">
+                          Facebook
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Your Facebook handle"
+                            {...field}
+                            className="h-11 border-gray-200 focus:border-coral-400 focus:ring-coral-400"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="contactDetails.x"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium">X</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Your X(Twitter) handle"
+                            {...field}
+                            className="h-11 border-gray-200 focus:border-coral-400 focus:ring-coral-400"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <Button type="submit" className="button w-full">
                   {type === 'Create' ? 'Create Listing' : 'Update Listing'}
                 </Button>
               </form>

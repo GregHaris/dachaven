@@ -19,6 +19,13 @@ export interface IProductListing extends Document {
   location: string;
   isAvailable: boolean;
   isNegotiable: boolean;
+  contactDetails: {
+    phoneNumber: string;
+    website?: string;
+    instagram?: string;
+    facebook?: string;
+    x?: string;
+  };
 }
 
 const ProductListingSchema = new Schema<IProductListing>({
@@ -37,6 +44,13 @@ const ProductListingSchema = new Schema<IProductListing>({
   location: { type: String, required: true },
   isAvailable: { type: Boolean, default: true },
   isNegotiable: { type: Boolean, default: false },
+  contactDetails: {
+    phoneNumber: { type: String, required: true },
+    website: { type: String },
+    instagram: { type: String },
+    facebook: { type: String },
+    x: { type: String },
+  },
   createdAt: { type: Date, default: Date.now, required: true },
   updatedAt: { type: Date, default: Date.now, required: true },
 });

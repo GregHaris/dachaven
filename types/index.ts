@@ -34,6 +34,13 @@ export type CreateProductListingParams = {
     isAvailable: boolean;
     isNegotiable: boolean;
   };
+  contactDetails: {
+    phoneNumber: string;
+    website?: string;
+    instagram?: string;
+    facebook?: string;
+    x?: string;
+  };
   path: string;
 };
 
@@ -55,6 +62,13 @@ export type UpdateProductListingParams = {
     location: string;
     isAvailable: boolean;
     isNegotiable: boolean;
+  };
+  contactDetails: {
+    phoneNumber: string;
+    website?: string;
+    instagram?: string;
+    facebook?: string;
+    x?: string;
   };
   path: string;
 };
@@ -111,6 +125,13 @@ export type ProductListing = {
   };
   createdAt: Date;
   updatedAt: Date;
+  contactDetails: {
+    phoneNumber: string;
+    website?: string;
+    instagram?: string;
+    facebook?: string;
+    x?: string;
+  };
 };
 
 // ====== CATEGORY PARAMS
