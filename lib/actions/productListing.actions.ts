@@ -49,7 +49,7 @@ export async function createProductListing({
     await connectToDatabase();
 
     const seller = await User.findById(userId);
-    if (!seller) throw new Error('Organizer not found');
+    if (!seller) throw new Error('Seller not found');
 
     const newProductListing = await ProductListings.create({
       ...productListing,
