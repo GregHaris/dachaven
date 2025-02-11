@@ -151,13 +151,13 @@
 
   .halfwayHidden {
     @media (min-width: 65.7rem) {
-      display: none   !important;
+      display: none !important;
     }
   }
 
   .halfwayFlex {
     @media (width >= 65.7rem) {
-      display: flex   !important;
+      display: flex !important;
     }
   }
 }
@@ -261,13 +261,13 @@
 }
 
 .cl-userButtonPopoverCard {
-  right: 4px   !important;
+  right: 4px !important;
 }
 
 .cl-formButtonPrimary:hover,
 .cl-formButtonPrimary:focus,
 .cl-formButtonPrimary:active {
-  background-color: #705cf7;
+  background-color: #3870af;
 }
 
 /* ========================================== REACT-DATEPICKER STYLES */
@@ -283,13 +283,13 @@
 }
 
 .react-datepicker__day--selected {
-  background-color: #624cf5   !important;
-  color: #ffffff   !important;
+  background-color: #123f70 !important;
+  color: #ffffff !important;
   border-radius: 4px;
 }
 
 .react-datepicker__time-list-item--selected {
-  background-color: #624cf5   !important;
+  background-color: #123f70 !important;
 }
 
 .hide-number-spinners {
