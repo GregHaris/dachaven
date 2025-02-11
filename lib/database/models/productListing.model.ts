@@ -4,7 +4,7 @@ export interface IProductListing extends Document {
   _id: string;
   title: string;
   description?: string;
-  imageUrl: string;
+  imageUrls: string[];
   price: string;
   currency: string;
   category: { _id: string; name: string };
@@ -31,7 +31,7 @@ export interface IProductListing extends Document {
 const ProductListingSchema = new Schema<IProductListing>({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  imageUrl: { type: String, required: true },
+  imageUrls: { type: [String], required: true },
   price: { type: String, required: true, default: '0' },
   currency: { type: String, required: true, default: 'NGN' },
   category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
