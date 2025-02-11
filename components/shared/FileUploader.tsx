@@ -2,7 +2,6 @@
 
 import { useCallback, useState, useRef, Dispatch, SetStateAction } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { useUploadThing } from '@/lib/uploadthing';
 import { generateClientDropzoneAccept } from 'uploadthing/client';
 import { Button } from '@ui/button';
 
