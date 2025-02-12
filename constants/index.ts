@@ -66,6 +66,7 @@ export const productListingDefaultValues = {
 export const categories = [
   'Arts & Crafts',
   'Books, Movies & Music',
+  'Education',
   'Beauty & Personal Care',
   'Clothing, Shoes & Jewelry',
   'Collectibles',
