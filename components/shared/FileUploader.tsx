@@ -1,19 +1,12 @@
 'use client';
 
 import { generateClientDropzoneAccept } from 'uploadthing/client';
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { Dispatch, SetStateAction, useCallback, useRef, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { X } from 'lucide-react';
 
-import { convertFileToUrl } from '@/lib/utils';
 import { Button } from '@ui/button';
+import { convertFileToUrl } from '@/lib/utils';
 
 type FileUploaderProps = {
   imageUrls: string[];
@@ -29,12 +22,6 @@ export default function FileUploader({
   const [files, setFilesState] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (Array.isArray(imageUrls) && imageUrls.length > 0) {
-      setFilesState(imageUrls.map((url) => new File([], url)));
-    }
-  }, [imageUrls]);
-
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       const newFiles = [...files, ...acceptedFiles];
@@ -45,10 +32,9 @@ export default function FileUploader({
         return;
       }
 
-      const fileUrls = newFiles.map((file) => convertFileToUrl(file));
-      onFieldChange(fileUrls);
       setFilesState(newFiles);
       setFiles(newFiles);
+      onFieldChange(newFiles.map((file) => convertFileToUrl(file)));
     },
     [files, setFiles, onFieldChange]
   );
