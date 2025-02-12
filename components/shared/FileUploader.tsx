@@ -17,7 +17,7 @@ import { Button } from '@ui/button';
 
 type FileUploaderProps = {
   imageUrls: string[];
-  onFieldChange: (...url: string[]) => void;
+  onFieldChange: (urls: string[]) => void;
   setFiles: Dispatch<SetStateAction<File[]>>;
 };
 
@@ -31,7 +31,7 @@ export default function FileUploader({
 
   useEffect(() => {
     if (Array.isArray(imageUrls) && imageUrls.length > 0) {
-      onFieldChange(...imageUrls);
+      onFieldChange(imageUrls);
     }
   }, [imageUrls, onFieldChange]);
 
@@ -46,7 +46,7 @@ export default function FileUploader({
       }
 
       const fileUrls = newFiles.map((file) => convertFileToUrl(file));
-      onFieldChange(...fileUrls);
+      onFieldChange(fileUrls);
       setFilesState(newFiles);
       setFiles(newFiles);
     },
@@ -63,13 +63,10 @@ export default function FileUploader({
   };
 
   const removeFile = (index: number) => {
-    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
-    setFilesState((prevFiles) => prevFiles.filter((_, i) => i !== index));
-    onFieldChange(
-      ...files
-        .filter((_, i) => i !== index)
-        .map((file) => convertFileToUrl(file))
-    );
+    const updatedFiles = files.filter((_, i) => i !== index);
+    setFiles(updatedFiles);
+    setFilesState(updatedFiles);
+    onFieldChange(updatedFiles.map((file) => convertFileToUrl(file)));
   };
 
   const formatFileSize = (size: number) => {
