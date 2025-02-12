@@ -11,12 +11,19 @@ export const seedCategories = async () => {
     await connectToDatabase();
 
     for (const categoryName of categories) {
-      await Category.findOneAndUpdate(
-        { name: categoryName },
-        { name: categoryName },
-        { upsert: true, new: true }
-      );
+      // Check if the category already exists
+      const existingCategory = await Category.findOne({ name: categoryName });
+
+      // If the category doesn't exist, create it
+      if (!existingCategory) {
+        await Category.create({ name: categoryName });
+        console.log(`Category "${categoryName}" seeded successfully.`);
+      } else {
+        console.log(`Category "${categoryName}" already exists.`);
+      }
     }
+
+    console.log('All categories have been processed.');
   } catch (error) {
     handleError(error);
   }
