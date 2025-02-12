@@ -42,7 +42,7 @@ const OrderSchema = new Schema({
   },
   productListing: {
     type: Schema.Types.ObjectId,
-    ref: 'ProductListings',
+    ref: 'ProductListing',
   },
   buyer: {
     type: Schema.Types.ObjectId,
