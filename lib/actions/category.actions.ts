@@ -6,6 +6,22 @@ import { handleError } from '../utils';
 import Category from '../database/models/category.model';
 import { categories } from '@/constants';
 
+export const seedCategories = async () => {
+  try {
+    await connectToDatabase();
+
+    for (const categoryName of categories) {
+      await Category.findOneAndUpdate(
+        { name: categoryName },
+        { name: categoryName },
+        { upsert: true, new: true }
+      );
+    }
+  } catch (error) {
+    handleError(error);
+  }
+};
+
 export const createCategory = async ({
   categoryName,
 }: CreateCategoryParams) => {
@@ -25,24 +41,6 @@ export const getAllCategories = async () => {
     const categories = await Category.find();
 
     return JSON.parse(JSON.stringify(categories));
-  } catch (error) {
-    handleError(error);
-  }
-};
-
-export const initializeCategories = async () => {
-  try {
-    await connectToDatabase();
-    const existingCategories = await Category.find().select('name');
-    const existingCategoryNames = existingCategories.map((cat) => cat.name);
-
-    const newCategories = categories.filter(
-      (category) => !existingCategoryNames.includes(category)
-    );
-
-    if (newCategories.length > 0) {
-      await Category.insertMany(newCategories.map((name) => ({ name })));
-    }
   } catch (error) {
     handleError(error);
   }
