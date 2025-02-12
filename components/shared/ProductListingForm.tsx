@@ -12,7 +12,6 @@ import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
 import {
-  categories,
   currencies,
   deliveryOptions,
   productCondition,
@@ -44,6 +43,7 @@ import {
 import { productListingFormSchema } from '@/lib/validator/index';
 import FileUploader from './FileUploader';
 import TiptapEditor from './TiptapEditor';
+import CategoriesDropdown from './CategoriesDropdown';
 
 type ProductListingFormProps = {
   userId: string;
@@ -286,23 +286,10 @@ export default function ProductListingForm({
                       <FormLabel className="text-sm font-medium">
                         Category <span className="text-red-400">*</span>
                       </FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="select-field p-regular-14">
-                            <SelectValue placeholder="Select a category" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {categories.map((category) => (
-                            <SelectItem key={category} value={category}>
-                              {category}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <CategoriesDropdown
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
                       <FormMessage />
                     </FormItem>
                   )}
