@@ -1,17 +1,19 @@
 'use client';
 
+import { generateClientDropzoneAccept } from 'uploadthing/client';
 import {
-  useCallback,
-  useState,
-  useRef,
   Dispatch,
   SetStateAction,
+  useCallback,
   useEffect,
+  useRef,
+  useState,
 } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { generateClientDropzoneAccept } from 'uploadthing/client';
-import { Button } from '@ui/button';
+import { X } from 'lucide-react';
+
 import { convertFileToUrl } from '@/lib/utils';
+import { Button } from '@ui/button';
 
 type FileUploaderProps = {
   imageUrls: string[];
@@ -60,6 +62,22 @@ export default function FileUploader({
     fileInputRef.current?.click();
   };
 
+  const removeFile = (index: number) => {
+    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+    setFilesState((prevFiles) => prevFiles.filter((_, i) => i !== index));
+    onFieldChange(
+      ...files
+        .filter((_, i) => i !== index)
+        .map((file) => convertFileToUrl(file))
+    );
+  };
+
+  const formatFileSize = (size: number) => {
+    if (size < 1024) return `${size} B`;
+    if (size < 1024 * 1024) return `${(size / 1024).toFixed(2)} KB`;
+    return `${(size / (1024 * 1024)).toFixed(2)} MB`;
+  };
+
   return (
     <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
       <div
@@ -80,7 +98,25 @@ export default function FileUploader({
           <h3 className="text-lg font-semibold mb-2">Selected Files:</h3>
           <ul className="list-disc pl-5 mb-4">
             {files.map((file, index) => (
-              <li key={index}>{file.name}</li>
+              <li
+                key={index}
+                className="flex items-center justify-between bg-gray-100 p-2 rounded"
+              >
+                <span className="truncate flex-1">
+                  {file.name} ({formatFileSize(file.size)})
+                </span>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => removeFile(index)}
+                  className="ml-2 text-red-500 hover:text-red-700 cursor-pointer"
+                  aria-label={`Remove ${file.name}`}
+                  title={`Remove ${file.name}`}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </li>
             ))}
           </ul>
         </div>
