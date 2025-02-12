@@ -43,7 +43,7 @@ const ProductListingSchema = new Schema(
     deliveryOptions: { type: String, required: true },
     quantity: { type: Number, required: true, default: 0 },
     location: { type: String, required: true },
-    isAvailable: { type: Boolean, default: true },
+    isAvailable: { type: Boolean, default: false },
     isNegotiable: { type: Boolean, default: false },
     contactDetails: {
       phoneNumber: { type: String, required: true },
