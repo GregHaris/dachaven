@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "clean": "rm -rf .next node_modules && pnpm install",
-    "seed": "ts-node -r tsconfig-paths/register ./scripts/seedCategories.ts"
+    "clean": "rm -rf .next node_modules && pnpm install"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.11.0",
