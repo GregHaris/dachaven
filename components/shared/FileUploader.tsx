@@ -31,9 +31,9 @@ export default function FileUploader({
 
   useEffect(() => {
     if (Array.isArray(imageUrls) && imageUrls.length > 0) {
-      onFieldChange(imageUrls);
+      setFilesState(imageUrls.map((url) => new File([], url)));
     }
-  }, [imageUrls, onFieldChange]);
+  }, [imageUrls]);
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
