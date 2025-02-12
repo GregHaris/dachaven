@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "clean": "rm -rf .next node_modules && pnpm install"
+    "clean": "rm -rf .next node_modules && pnpm install",
+    "seed": "ts-node -r tsconfig-paths/register ./scripts/seedCategories.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.11.0",
@@ -57,12 +58,14 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
-    "@types/node": "^22.10.10",
+    "@types/node": "^22.13.1",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "eslint": "^9.18.0",
     "eslint-config-next": "15.1.6",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.0.0",
+    "tslib": "^2.8.1",
     "typescript": "^5.7.3"
   }
 }
