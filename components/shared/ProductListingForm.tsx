@@ -422,9 +422,12 @@ export default function ProductListingForm({
                           <Input
                             type="number"
                             {...field}
+                            value={field.value}
                             onChange={(e) =>
                               field.onChange(
-                                Number.parseInt(e.target.value, 10)
+                                e.target.value === ''
+                                  ? ''
+                                  : Number(e.target.value)
                               )
                             }
                             className="input-field p-regular-14 hide-number-spinners"
