@@ -1,27 +1,20 @@
-'use client';
+import { auth } from '@clerk/nextjs/server';
+import ProductListingsForm from '@shared/ProductListingForm';
+import ProductListingHeading from '@shared/ProductListingHeading';
 
-import { useUser } from '@clerk/nextjs';
-import ProductListingsForm from '@/components/shared/ProductListingForm';
+const CreateProductListings = async () => {
+  const { sessionClaims } = await auth();
 
-const CreateProductListings = () => {
-  const { isLoaded, user } = useUser();
+  // Type assertion to help TypeScript understand the structure
+  const claims = sessionClaims as CustomJwtSessionClaims;
 
-  if (!isLoaded) {
-    return <div>{' '}</div>;
-  }
-
-  const userId = user?.id as string;
-  const userName = user?.firstName || 'User';
+  // Access userId from the nested object
+  const userId = claims?.userId?.userId as string;
 
   return (
     <>
       <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-1 md:py-5">
-        <div className="wrapper text-left">
-          <h3 className=" h3-bold">Hey {userName}!</h3>
-          <p className="p-regular-16 py-4">
-            Ready to add your product? It only takes a few minutes
-          </p>
-        </div>
+        <ProductListingHeading />
       </section>
       <div className="wrapper my-8">
         <ProductListingsForm userId={userId} type="Create" />
