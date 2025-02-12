@@ -28,7 +28,7 @@ export const productListingFormSchema = z.object({
     phoneNumber: z
       .string()
       .min(10, { message: 'Phone number must be at least 10 characters' }),
-    website: z.string().url({ message: 'Invalid website URL' }).optional(),
+    website: z.string().optional(),
     instagram: z.string().optional(),
     facebook: z.string().optional(),
     x: z.string().optional(),
