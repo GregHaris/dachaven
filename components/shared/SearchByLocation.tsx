@@ -24,13 +24,13 @@ const Search = ({
     const delayDebounceFn = setTimeout(() => {
       if (location) {
         newUrl = formUrlQuery({
-          params: searchParams.toString(),
+          params: searchParams?.toString() || '',
           key: 'location',
           value: location,
         });
       } else {
         newUrl = removeKeysFromQuery({
-          params: searchParams.toString(),
+          params: searchParams?.toString() || '',
           keysToRemove: ['location'],
         });
       }

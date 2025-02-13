@@ -24,13 +24,13 @@ export const NameSearch = ({
     const delayDebounceFn = setTimeout(() => {
       if (query) {
         newUrl = formUrlQuery({
-          params: searchParams.toString(),
+          params: searchParams?.toString() || '',
           key: 'query',
           value: query,
         });
       } else {
         newUrl = removeKeysFromQuery({
-          params: searchParams.toString(),
+          params: searchParams?.toString() || '',
           keysToRemove: ['query'],
         });
       }
