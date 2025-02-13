@@ -1,5 +1,7 @@
 'use client';
 
+import { Button } from '@ui/button';
+import { Input } from '@ui/input';
 import { usePathname, useRouter } from 'next/navigation';
 
 export const SearchUsers = () => {
@@ -7,7 +9,7 @@ export const SearchUsers = () => {
   const pathname = usePathname();
 
   return (
-    <div>
+    <div className="mb-4">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -16,10 +18,24 @@ export const SearchUsers = () => {
           const queryTerm = formData.get('search') as string;
           router.push(pathname + '?search=' + queryTerm);
         }}
+        className="flex gap-2"
       >
-        <label htmlFor="search">Search for users</label>
-        <input id="search" name="search" type="text" />
-        <button type="submit">Submit</button>
+        <label htmlFor="search" className="sr-only">
+          Search for users
+        </label>
+        <Input
+          id="search"
+          name="search"
+          type="text"
+          className="input-field p-regular-16"
+          placeholder="Search for users"
+        />
+        <Button
+          type="submit"
+          className="button"
+        >
+          Submit
+        </Button>
       </form>
     </div>
   );
