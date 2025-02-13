@@ -140,7 +140,7 @@
     @apply min-h-[150px] cursor-text rounded-md border-none p-5 focus-within:outline-none focus-within:ring-0 bg-grey-50;
   }
   .button {
-    @apply rounded-md h-[44px] cursor-pointer text-primary-50;
+    @apply rounded-md h-[40px] cursor-pointer text-primary-50;
   }
   .select-item {
     @apply py-3 cursor-pointer focus:bg-primary-50;
