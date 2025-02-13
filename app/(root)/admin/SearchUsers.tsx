@@ -18,6 +18,13 @@ export const SearchUsers = () => {
     }
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      router.push(pathname + '?search=' + searchTerm);
+    }
+  };
+
   return (
     <div className="mb-4">
       <form
@@ -41,6 +48,7 @@ export const SearchUsers = () => {
           placeholder="Search for users"
           value={searchTerm}
           onChange={handleInputChange}
+          onKeyPress={handleKeyPress}
         />
         <Button type="submit" className="button">
           Submit

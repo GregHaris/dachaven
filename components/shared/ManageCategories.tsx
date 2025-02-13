@@ -135,6 +135,13 @@ export default function ManageCategories() {
     }
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSearchCategory();
+    }
+  };
+
   const toggleShowAllCategories = () => {
     setShowAllCategories(!showAllCategories);
   };
@@ -148,6 +155,7 @@ export default function ManageCategories() {
           placeholder="Enter category name"
           value={categoryName}
           onChange={handleInputChange}
+          onKeyPress={handleKeyPress}
           className="input-field"
         />
         <Button className="button" onClick={handleSearchCategory}>
