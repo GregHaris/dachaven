@@ -1,42 +1,48 @@
 'use server';
 
 import { connectToDatabase } from '../database';
-import { CreateCategoryParams } from '@/types';
 import { handleError } from '../utils';
 import Category from '../database/models/category.model';
-import { categories } from '@/constants';
 
-export const seedCategories = async () => {
+export const createCategory = async ({
+  categoryName,
+}: {
+  categoryName: string;
+}) => {
   try {
     await connectToDatabase();
-
-    for (const categoryName of categories) {
-      // Check if the category already exists
-      const existingCategory = await Category.findOne({ name: categoryName });
-
-      // If the category doesn't exist, create it
-      if (!existingCategory) {
-        await Category.create({ name: categoryName });
-        console.log(`Category "${categoryName}" seeded successfully.`);
-      } else {
-        console.log(`Category "${categoryName}" already exists.`);
-      }
-    }
-
-    console.log('All categories have been processed.');
+    const newCategory = await Category.create({ name: categoryName });
+    return JSON.parse(JSON.stringify(newCategory));
   } catch (error) {
     handleError(error);
   }
 };
 
-export const createCategory = async ({
+export const updateCategory = async ({
+  categoryId,
   categoryName,
-}: CreateCategoryParams) => {
+}: {
+  categoryId: string;
+  categoryName: string;
+}) => {
   try {
     await connectToDatabase();
-    const newCategory = await Category.create({ name: categoryName });
+    const updatedCategory = await Category.findByIdAndUpdate(
+      categoryId,
+      { name: categoryName },
+      { new: true }
+    );
+    return JSON.parse(JSON.stringify(updatedCategory));
+  } catch (error) {
+    handleError(error);
+  }
+};
 
-    return JSON.parse(JSON.stringify(newCategory));
+export const deleteCategory = async (categoryId: string) => {
+  try {
+    await connectToDatabase();
+    const deletedCategory = await Category.findByIdAndDelete(categoryId);
+    return JSON.parse(JSON.stringify(deletedCategory));
   } catch (error) {
     handleError(error);
   }
@@ -46,7 +52,18 @@ export const getAllCategories = async () => {
   try {
     await connectToDatabase();
     const categories = await Category.find();
+    return JSON.parse(JSON.stringify(categories));
+  } catch (error) {
+    handleError(error);
+  }
+};
 
+export const getCategoryByName = async (categoryName: string) => {
+  try {
+    await connectToDatabase();
+    const categories = await Category.find({
+      name: { $regex: categoryName, $options: 'i' },
+    });
     return JSON.parse(JSON.stringify(categories));
   } catch (error) {
     handleError(error);
