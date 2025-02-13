@@ -157,7 +157,7 @@ export default function ManageCategories() {
       {searchResults.length > 0 && (
         <div className="space-y-2">
           {searchResults.map((result) => (
-            <div key={result._id} className="flex gap-2">
+            <div key={result._id} className="flex gap-2 items-center">
               <span>
                 {result.name
                   .split(new RegExp(`(${categoryName})`, 'gi'))
