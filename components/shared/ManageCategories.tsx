@@ -165,14 +165,26 @@ export default function ManageCategories() {
                 className="input-field"
               />
               <Button
+                type="button"
+                variant={'ghost'}
+                size={'icon'}
                 onClick={() => handleSelectCategory(result)}
-                className="p-2"
+                className="p-2 cursor-pointer"
+                aria-label={'Edit'}
+                title={'Edit'}
               >
                 <Edit />
               </Button>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <Button variant="destructive" className="p-2">
+                  <Button
+                    type="button"
+                    variant={'ghost'}
+                    size={'icon'}
+                    className="p-2 text-red-500 hover:text-red-700 cursor-pointer"
+                    aria-label={'Edit'}
+                    title={'Edit'}
+                  >
                     <X />
                   </Button>
                 </AlertDialogTrigger>
@@ -220,12 +232,27 @@ export default function ManageCategories() {
             {categories.map((category) => (
               <li key={category._id} className="flex gap-2 items-center">
                 <span>{category.name}</span>
-                <Button onClick={() => handleSelectCategory(category)} className="p-2">
+                <Button
+                  type="button"
+                  variant={'ghost'}
+                  size={'icon'}
+                  onClick={() => handleSelectCategory(category)}
+                  className="p-2 cursor-pointer"
+                  aria-label={'Edit'}
+                  title={'Edit'}
+                >
                   <Edit />
                 </Button>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button variant="destructive" className="p-2">
+                    <Button
+                      type="button"
+                      variant={'ghost'}
+                      size={'icon'}
+                      className="p-2 text-red-500 hover:text-red-700 cursor-pointer"
+                      aria-label={'Edit'}
+                      title={'Edit'}
+                    >
                       <X />
                     </Button>
                   </AlertDialogTrigger>
