@@ -11,6 +11,10 @@ export const headerLinks = [
     label: 'Dashboard',
     route: '/dashboard',
   },
+  {
+    label: 'Admin',
+    route: '/admin'
+  }
 ];
 
 export const heroContent = [
