@@ -158,12 +158,17 @@ export default function ManageCategories() {
         <div className="space-y-2">
           {searchResults.map((result) => (
             <div key={result._id} className="flex gap-2">
-              <Input
-                type="text"
-                value={categoryName}
-                onChange={handleInputChange}
-                className="input-field"
-              />
+              <span>
+                {result.name
+                  .split(new RegExp(`(${categoryName})`, 'gi'))
+                  .map((part, index) =>
+                    part.toLowerCase() === categoryName.toLowerCase() ? (
+                      <mark key={index}>{part}</mark>
+                    ) : (
+                      part
+                    )
+                  )}
+              </span>
               <Button
                 type="button"
                 variant={'ghost'}
