@@ -5,5 +5,8 @@ declare global {
     userId?: {
       userId?: string;
     };
+    metadata: {
+      role?: Roles;
+    };
   }
 }
