@@ -1,6 +1,6 @@
-import ProductListingsForm from '@/components/shared/ProductListingForm';
-import { auth } from '@clerk/nextjs/server';
 import { getProductListingById } from '@/lib/actions/productListing.actions';
+import getUserId from '@/utils/userId';
+import ProductListingsForm from '@/components/shared/ProductListingForm';
 
 type UpdateProductListingsProps = {
   params: Promise<{ id: string }>;
@@ -11,13 +11,7 @@ const UpdateProductListings = async (props: UpdateProductListingsProps) => {
 
   const { id } = params;
 
-  const { sessionClaims } = await auth();
-
-  // Type assertion to help TypeScript understand the structure
-  const claims = sessionClaims as CustomJwtSessionClaims;
-
-  // Access userId from the nested object
-  const userId = claims?.userId?.userId as string;
+  const userId = await getUserId();
 
   const productListing = await getProductListingById(id);
 

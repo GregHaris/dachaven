@@ -1,9 +1,9 @@
-import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { formatDateTime } from '@/lib/utils';
 import { IProductListing } from '@/lib/database/models/productListing.model';
+import getUserId from '@/utils/userId';
 
 import { DeleteConfirmation } from './DeleteConfirmation';
 
@@ -14,13 +14,7 @@ type CardProps = {
 };
 
 const Card = async ({ productListing, hasOrderLink, hidePrice }: CardProps) => {
-  const { sessionClaims } = await auth();
-
-  // Type assertion to help TypeScript understand the structure
-  const claims = sessionClaims as CustomJwtSessionClaims;
-
-  // Access userId from the nested object
-  const userId = claims?.userId?.userId as string;
+  const userId = await getUserId();
 
   const isProductListingsCreator =
     userId === productListing.seller._id.toString();
