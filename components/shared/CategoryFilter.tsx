@@ -16,7 +16,7 @@ import {
 
 const Filter = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams() || new URLSearchParams();
   const router = useRouter();
 
   useEffect(() => {
