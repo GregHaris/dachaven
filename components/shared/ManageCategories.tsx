@@ -227,10 +227,10 @@ export default function ManageCategories() {
       {successMessage && <p className="text-green-500">{successMessage}</p>}
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       <div className="flex gap-2">
-        <Button onClick={handleAddCategory}>Add Category</Button>
+        <Button onClick={handleAddCategory} className='button'>Add Category</Button>
         <Button
           onClick={handleUpdateCategory}
-          disabled={!selectedCategoryId || !categoryName.trim()}
+          disabled={!selectedCategoryId || !categoryName.trim()} className='button'
         >
           Update Category
         </Button>
