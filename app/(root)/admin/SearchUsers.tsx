@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 export const SearchUsers = () => {
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname = usePathname() || '';
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
