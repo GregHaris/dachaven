@@ -53,7 +53,8 @@ export default async function SetUsersRoles({
                 <input type="hidden" value={user.id} name="id" />
                 <Button
                   type="submit"
-                  className="button bg-red-500 hover:bg-red-400"
+                  className="button"
+                  variant={'destructive'}
                 >
                   Remove Role
                 </Button>
