@@ -3,10 +3,20 @@
 import { Button } from '@ui/button';
 import { Input } from '@ui/input';
 import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export const SearchUsers = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    if (!value.trim()) {
+      router.push(pathname);
+    }
+  };
 
   return (
     <div className="mb-4">
@@ -29,11 +39,10 @@ export const SearchUsers = () => {
           type="text"
           className="input-field p-regular-16"
           placeholder="Search for users"
+          value={searchTerm}
+          onChange={handleInputChange}
         />
-        <Button
-          type="submit"
-          className="button"
-        >
+        <Button type="submit" className="button">
           Submit
         </Button>
       </form>
