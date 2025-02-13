@@ -62,7 +62,7 @@ export const getCategoryByName = async (categoryName: string) => {
   try {
     await connectToDatabase();
     const categories = await Category.find({
-      name: { $regex: categoryName, $options: 'i' },
+      name: { $regex: `\\b${categoryName}\\b`, $options: 'i' },
     });
     return JSON.parse(JSON.stringify(categories));
   } catch (error) {
