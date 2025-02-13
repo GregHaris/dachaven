@@ -25,7 +25,7 @@ export default clerkMiddleware(async (auth, request) => {
   // Protect all routes starting with `/admin`
   if (
     isAdminRoute(request) &&
-    !(userRole === 'admin' || userRole === 'moderator')
+    !(userRole === 'admin')
   ) {
     const url = new URL('/', request.url);
     return NextResponse.redirect(url);
