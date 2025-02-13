@@ -11,7 +11,7 @@ import NavItems from './NavItems';
 import SearchByName from './SearchByName';
 import SearchByLocation from './SearchByLocation';
 
-export const Header = () => {
+const Header = () => {
   const pathname = usePathname();
 
   return (
@@ -70,3 +70,5 @@ export const Header = () => {
     </header>
   );
 };
+
+export default Header;
