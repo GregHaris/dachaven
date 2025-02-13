@@ -48,7 +48,7 @@ export const SearchUsers = () => {
           placeholder="Search for users"
           value={searchTerm}
           onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
         />
         <Button type="submit" className="button">
           Submit

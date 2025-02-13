@@ -155,7 +155,7 @@ export default function ManageCategories() {
           placeholder="Enter category name"
           value={categoryName}
           onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
           className="input-field"
         />
         <Button className="button" onClick={handleSearchCategory}>
