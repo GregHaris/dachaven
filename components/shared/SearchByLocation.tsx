@@ -52,7 +52,7 @@ const Search = ({
       <Input
         type="text"
         placeholder={placeholder}
-        className="input-field p-regular-16"
+        className="contact-details-input-field p-regular-16"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
       />
