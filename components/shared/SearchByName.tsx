@@ -53,7 +53,7 @@ export const NameSearch = ({
       <Input
         type="text"
         placeholder={placeholder}
-        className="contact-details-input-field p-regular-16"
+        className="nested-input-field p-regular-16"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />

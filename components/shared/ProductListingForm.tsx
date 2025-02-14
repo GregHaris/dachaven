@@ -505,7 +505,7 @@ export default function ProductListingForm({
                             <Input
                               placeholder="Your phone number"
                               {...field}
-                              className="contact-details-input-field p-regular-14"
+                              className="nested-input-field p-regular-14"
                             />
                           </div>
                         </FormControl>
@@ -524,7 +524,7 @@ export default function ProductListingForm({
                             <Input
                               placeholder="www.example.com"
                               {...field}
-                              className="contact-details-input-field p-regular-14"
+                              className="nested-input-field p-regular-14"
                             />
                           </div>
                         </FormControl>
@@ -548,7 +548,7 @@ export default function ProductListingForm({
                             <Input
                               placeholder="Your Instagram handle"
                               {...field}
-                              className="contact-details-input-field p-regular-14"
+                              className="nested-input-field p-regular-14"
                             />
                           </div>
                         </FormControl>
@@ -572,7 +572,7 @@ export default function ProductListingForm({
                             <Input
                               placeholder="Your Facebook handle"
                               {...field}
-                              className="contact-details-input-field p-regular-14"
+                              className="nested-input-field p-regular-14"
                             />
                           </div>
                         </FormControl>
@@ -596,7 +596,7 @@ export default function ProductListingForm({
                             <Input
                               placeholder="Your X (Twitter) handle"
                               {...field}
-                              className="contact-details-input-field p-regular-14"
+                              className="nested-input-field p-regular-14"
                             />
                           </div>
                         </FormControl>

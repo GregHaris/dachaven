@@ -7,11 +7,7 @@ import Image from 'next/image';
 import { formUrlQuery, removeKeysFromQuery } from '@/lib/utils';
 import { Input } from '@ui/input';
 
-const Search = ({
-  placeholder = 'Location...',
-}: {
-  placeholder?: string;
-}) => {
+const Search = ({ placeholder = 'Location...' }: { placeholder?: string }) => {
   const [location, setLocation] = useState('');
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -52,7 +48,7 @@ const Search = ({
       <Input
         type="text"
         placeholder={placeholder}
-        className="contact-details-input-field p-regular-16"
+        className="nested-input-field p-regular-16"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
       />
