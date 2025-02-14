@@ -148,7 +148,7 @@ export default function ManageCategories() {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-semibold">Manage Categories</h2>
+      <h2 className="text-xl font-semibold">Manage Product Categories</h2>
       <div className="flex gap-2">
         <Input
           type="text"
