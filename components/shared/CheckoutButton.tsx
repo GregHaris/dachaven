@@ -1,7 +1,6 @@
 'use client';
 
 import { SignedIn, SignedOut, SignInButton, useUser } from '@clerk/nextjs';
-import { useState, useEffect } from 'react';
 
 import { Button } from '../ui/button';
 import { IProductListing } from '@/lib/database/models/productListing.model';
