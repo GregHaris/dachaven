@@ -4,6 +4,7 @@ import { generateClientDropzoneAccept } from 'uploadthing/client';
 import { Dispatch, SetStateAction, useCallback, useRef, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { X } from 'lucide-react';
+import Image from 'next/image';
 
 import { Button } from '@ui/button';
 import { convertFileToUrl } from '@/lib/utils';
@@ -110,7 +111,7 @@ export default function FileUploader({
           <ul className="list-disc pl-5 mb-4">
             {imageUrls.map((url, index) => (
               <li key={index}>
-                <img
+                <Image
                   src={url}
                   alt={`Uploaded file ${index + 1}`}
                   className="w-full h-auto"
