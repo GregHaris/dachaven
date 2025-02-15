@@ -2,13 +2,15 @@ import { checkRole } from '@/utils/roles';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
-const DisplayAdmin = async ({ role }: { role: 'admin' }) => {
-  if (!(await checkRole(role))) return null;
+const DisplayAdmin = async () => {
+  if (!(await checkRole('admin'))) return null;
 
   return (
-    <div>
+    <div className="hover:bg-grey-50 rounded-md">
       <Link href="/admin">
-        <Button variant="ghost">Admin</Button>
+        <Button variant="ghost" className="p-medium-16 cursor-pointer">
+          Admin
+        </Button>
       </Link>
     </div>
   );
