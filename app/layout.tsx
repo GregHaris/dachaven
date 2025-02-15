@@ -11,7 +11,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Vitiket',
+  title: 'Dac Haven',
   description: 'An Ecommerce app',
   icons: '/assets/images/logo.png',
 };

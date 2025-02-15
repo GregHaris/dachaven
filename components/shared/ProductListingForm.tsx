@@ -623,7 +623,7 @@ export default function ProductListingForm({
           <div className="hidden lg:block">
             <Image
               src={'/assets/images/logo.svg'}
-              alt="vitiket"
+              alt="dachaven"
               width={600}
               height={800}
               className="w-full h-auto"
